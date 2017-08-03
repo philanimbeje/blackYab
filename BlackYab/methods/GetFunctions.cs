@@ -266,7 +266,6 @@ namespace BlackYab
 
             query = "select Name, rolename as Role from admin a join role r on a.roleID = r.roleID where a.tournamentID='" + model.TournamentID + "'";
             model.OrgcomTable = Table(query);
-
         }
 
         private string Item(List<string> list)
