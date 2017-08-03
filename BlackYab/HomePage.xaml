@@ -1,0 +1,190 @@
+﻿<Window x:Class="BlackYab.HomePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlackYab"
+        mc:Ignorable="d"
+        Title="Home" Height="644.452" Width="1333.628" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <SolidColorBrush Color="#FF464545"/>
+    </Window.Background>
+    <Window.Resources>
+        <Color x:Key="Color1">#FF464545</Color>
+        <Color x:Key="Color2">#FFD4D8F9</Color>
+        <Color x:Key="Color3">#FFD4D8F9</Color>
+        <Color x:Key="Color4">#FF803A3A</Color>
+        <Color x:Key="Color5">#FF803A3A</Color>
+        <Color x:Key="Color6">#FF464545</Color>
+        <Color x:Key="Color7">#FF80AE83</Color>
+        <Color x:Key="Color8">#FF80AE83</Color>
+        <Color x:Key="Color9">#FF80AE83</Color>
+        <Color x:Key="Color10">#FF588D58</Color>
+        <Color x:Key="Color11">#FF588D58</Color>
+        <Color x:Key="Color12">#FF588D58</Color>
+        <Color x:Key="Color13">#FF588D58</Color>
+        <Color x:Key="Color14">#FF588D58</Color>
+        <Color x:Key="Color15">#FF464545</Color>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-3">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="505" Margin="42,61,0,0" VerticalAlignment="Top" Width="1246" RenderTransformOrigin="0.5,0.5">
+            <TabControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.164"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TabControl.RenderTransform>
+            <TabItem Header="Tournament">
+                <Grid Background="#FF80AE83" Margin="0,-1,0,1">
+                    <Label x:Name="label1_Copy" Content="Competitors:" HorizontalAlignment="Left" Margin="13,90,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label2" Content="Speakers:" HorizontalAlignment="Left" Margin="13,131,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label3" Content="Speakers in team:" HorizontalAlignment="Left" Margin="30,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.525,0.177"/>
+                    <Label x:Name="label4" Content="Teams:" HorizontalAlignment="Left" Margin="13,205,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label5" Content="Incomplete teams:" HorizontalAlignment="Left" Margin="30,236,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label6" Content="Adjudicators:" HorizontalAlignment="Left" Margin="13,285,0,0" VerticalAlignment="Top"/>
+                    <Rectangle HorizontalAlignment="Left" Height="426" Margin="1075,33,0,0" Stroke="White" VerticalAlignment="Top" Width="133">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{DynamicResource Color7}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label x:Name="label1" HorizontalContentAlignment="Center" Content="Tournament Summary" HorizontalAlignment="Left" Margin="0,38,0,0" VerticalAlignment="Top" Width="207" FontSize="18" FontWeight="Bold"/>
+                    <Label x:Name="label1_Copy1" HorizontalContentAlignment="Center" Content="Current Round" HorizontalAlignment="Left" Margin="0,342,0,0" VerticalAlignment="Top" Width="207" FontSize="18" FontWeight="Bold"/>
+                    <Label x:Name="labelRound" HorizontalContentAlignment="Center" Content="100" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="195" FontSize="48" FontWeight="Bold" Height="88"/>
+                    <Button x:Name="buttonEditDebator" Content="Edit Debator" HorizontalAlignment="Left" Margin="1085,112,0,0" VerticalAlignment="Top" Width="112" BorderBrush="White" Foreground="White">
+                        <Button.Background>
+                            <SolidColorBrush Color="#FF588D58"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="buttonEditTeam" Content="Edit Team" HorizontalAlignment="Left" Margin="1085,139,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource Color10}"/>
+                        </Button.Background>
+                    </Button>
+                    <DataGrid x:Name="dataGridVInstitution" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="488,261,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
+                    <DataGrid x:Name="dataGridVTeam" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="483,33,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
+                    <DataGrid x:Name="dataGridVAdjudicators" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="759,33,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
+                    <DataGrid x:Name="dataGridVOrgcom" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="764,261,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
+                    <DataGrid x:Name="dataGridVSpeakers" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="207,33,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
+                    <DataGrid x:Name="dataGridVRooms" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="207,261,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
+                    <Button x:Name="buttonEditVenues" Content="Edit Room" HorizontalAlignment="Left" Margin="1085,193,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource Color10}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="buttonEditInstitution" Content="Edit Institution" HorizontalAlignment="Left" Margin="1085,166,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource Color10}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="buttonEditOrgCom" Content="Edit OrgCom" HorizontalAlignment="Left" Margin="1085,220,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource Color10}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="buttonEditViewUpdate" Content="Update Table Views" HorizontalAlignment="Left" Margin="1085,375,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Height="46" >
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource Color10}"/>
+                        </Button.Background>
+                    </Button>
+                    <Label x:Name="label4_Copy" Content="Teams:" HorizontalAlignment="Left" Margin="483,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.097,0.41"/>
+                    <Label x:Name="label6_Copy" Content="Adjudicators:" HorizontalAlignment="Left" Margin="759,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label6_Copy1" Content="Rooms:" HorizontalAlignment="Left" Margin="207,236,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label6_Copy2" Content="Institutions:" HorizontalAlignment="Left" Margin="488,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.379,-0.396"/>
+                    <Label x:Name="label6_Copy3" Content="Organising Commitee Members:" HorizontalAlignment="Left" Margin="764,236,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label2_Copy" Content="Speakers:" HorizontalAlignment="Left" Margin="207,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.61,-1.733"/>
+                    <Label x:Name="labelCompetitors" Content="" HorizontalAlignment="Left" Margin="96,90,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.284"/>
+                    <Label x:Name="labelSpeakers" Content="" HorizontalAlignment="Left" Margin="81,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.284"/>
+                    <Label x:Name="labelSpeakersInTeams" Content="" HorizontalAlignment="Left" Margin="138,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.284"/>
+                    <Label x:Name="labelTeams" Content="" HorizontalAlignment="Left" Margin="65,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.284"/>
+                    <Label x:Name="labelIncompleteTeams" Content="" HorizontalAlignment="Left" Margin="142,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.284"/>
+                    <Label x:Name="labelAdjudicators" Content="" HorizontalAlignment="Left" Margin="97,285,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.546,-0.284"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Reports" Background="#FF6161DA" Foreground="#FF0A0909" FontSize="11" BorderBrush="#FF607BCD">
+                <Grid Background="#FFD4D8F9">
+                    <TabControl x:Name="tabControl1" HorizontalAlignment="Left" Height="417" Margin="10,29,0,0" VerticalAlignment="Top" Width="1216">
+                        <TabItem Header="General">
+                            <Grid Background="#FFE5E5E5">
+                                <Button x:Name="btnPDFGeneral" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
+                                <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309"/>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Speakers">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="DataGridSpeakers"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" >
+
+                                </DataGrid>
+                                <Expander x:Name="expander1" Header="Export Report" HorizontalAlignment="Left" Margin="1094,10,0,0" VerticalAlignment="Top" IsExpanded="False">
+                                    <ListView x:Name="listView" Height="117" Width="100">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn/>
+
+
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Expander>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Teams">
+                            <Grid Background="#FFE5E5E5">
+                                <Button x:Name="button_Copy" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
+                                <DataGrid x:Name="dataGridTeams"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Adjudicators">
+                            <Grid Background="#FFE5E5E5">
+                                <Button x:Name="button" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
+                                <DataGrid x:Name="dataGridAdj"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Round">
+                            <Grid Background="#FFE5E5E5">
+                                <Button x:Name="button_Copy3" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
+                                <DataGrid x:Name="dataGridRound"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Room">
+                            <Grid Background="#FFE5E5E5">
+                                <Button x:Name="button_Copy4" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
+                                <DataGrid x:Name="dataGridRoom"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Institutions">
+                            <Grid Background="#FFE5E5E5">
+                                <Button x:Name="buttonInstitutionPDF" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
+                                <DataGrid x:Name="dataGridInstitution"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309"/>
+
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+
+                    <Button x:Name="buttonUpdateDataGrids" Content="Update" HorizontalAlignment="Left" Margin="1125,10,0,0" VerticalAlignment="Top" Width="101" Height="35" FontSize="12" >
+                        <Button.BorderBrush>
+                            <SolidColorBrush Color="{DynamicResource Color3}"/>
+                        </Button.BorderBrush>
+                        <Button.Background>
+                            <SolidColorBrush Color="{DynamicResource Color2}"/>
+                        </Button.Background>
+                    </Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label x:Name="labelTName" Content="" HorizontalAlignment="Left" Margin="42,10,0,0" VerticalAlignment="Top" Width="764" Height="44" Foreground="#FFFBF2F2" FontSize="20"/>
+        <Button x:Name="buttonLogOff" Content="Log Off" HorizontalAlignment="Left" Margin="1157,569,0,0" VerticalAlignment="Top" Width="128" Height="26"  BorderBrush="White" Foreground="#FFFFC0C0" Click="buttonLogOff_Click">
+            <Button.Background>
+                <SolidColorBrush Color="#FF464545"/>
+            </Button.Background>
+        </Button>
+        <Expander x:Name="expander" Header="About" HorizontalAlignment="Left" Margin="1112,40,0,0" VerticalAlignment="Top" IsExpanded="false" Width="104">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Height="190" Background="#FF7E7E7E" Foreground="#FFF1EFEF" Margin="-138,0,-14,0" DataContext="e" OpacityMask="#FFCF7373"><Run Text="blackYAB "/><LineBreak/><Run/><LineBreak/><Run Text="version 2"/></TextBlock>
+        </Expander>
+        <Label x:Name="label_Copy" Content="Logged In:" HorizontalAlignment="Left" Margin="1112,12,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FFF1E7E7" Width="57"/>
+        <Label x:Name="labelLoggedIn" Content="" HorizontalAlignment="Left" Margin="1169,6,0,0" VerticalAlignment="Top" Width="159" Height="34" Foreground="#FFF1E7E7" FontSize="16"/>
+
+    </Grid>
+</Window>
