@@ -12,112 +12,59 @@ namespace BlackYab
 {
     class GetFunctions
     {
+        Sqlfunctions sql = new Sqlfunctions();
+
         public void getTournamentDetails(Model model)
         {
-            var tournament = this.CompileList("select tournamentname from tournament where tournamentID='" + model.TournamentID + "'");
+            var tournament = sql.CompileList("select tournamentname from tournament where tournamentID='" + model.TournamentID + "'");
             model.TournamentName = Item(tournament);
 
-            var Role = this.CompileList("select rolename from role where roleID='" + model.RoleID + "'");
+            var Role = sql.CompileList("select rolename from role where roleID='" + model.RoleID + "'");
             model.Role = Item(Role);
 
-            var CurrentRound = this.CompileList("select CONVERT(varchar(10),roundnumber) from round where isCurrentRound='Y' and tournamentid='" + model.TournamentID + "'");
+            var CurrentRound = sql.CompileList("select CONVERT(varchar(10),roundnumber) from round where isCurrentRound='Y' and tournamentid='" + model.TournamentID + "'");
             model.CurrentRound = Convert.ToInt32(Item(CurrentRound));
 
-            var Rounds = this.CompileList("select CONVERT(varchar(10),rounds) from tournament where tournamentid='" + model.TournamentID + "'");
+            var Rounds = sql.CompileList("select CONVERT(varchar(10),rounds) from tournament where tournamentid='" + model.TournamentID + "'");
             model.Rounds = Convert.ToInt32(Item(Rounds));
 
-            var BreakRound = this.CompileList("select CONVERT(varchar(10),breakround) from tournament where tournamentid='" + model.TournamentID + "'");
+            var BreakRound = sql.CompileList("select CONVERT(varchar(10),breakround) from tournament where tournamentid='" + model.TournamentID + "'");
             model.BreakRound = Convert.ToInt32(Item(BreakRound));
 
-            var RoundMotion = this.CompileList("select motion from motion where roundNumber='" + model.CurrentRound + "' and  tournamentid='" + model.TournamentID + "'");
+            var RoundMotion = sql.CompileList("select motion from motion where roundNumber='" + model.CurrentRound + "' and  tournamentid='" + model.TournamentID + "'");
             model.RoundMotion = Item(RoundMotion);
 
-            var TotalTeams = this.CompileList("select teamName from team  where tournamentid='" + model.TournamentID + "'");
+            var TotalTeams = sql.CompileList("select teamName from team  where tournamentid='" + model.TournamentID + "'");
             model.TotalTeams = TotalTeams.Count;
 
-            var TotalAdjudicators = this.CompileList("select adjname from adjudicator  where tournamentid='" + model.TournamentID + "'");
+            var TotalAdjudicators = sql.CompileList("select adjname from adjudicator  where tournamentid='" + model.TournamentID + "'");
             model.TotalAdjudicators = TotalAdjudicators.Count;
 
-            var TotalSpeakers = this.CompileList("select speakername from speaker  where tournamentid='" + model.TournamentID + "'");
+            var TotalSpeakers = sql.CompileList("select speakername from speaker  where tournamentid='" + model.TournamentID + "'");
             model.TotalSpeakers = TotalSpeakers.Count;
 
             var query = "";
 
             query = "select teamName, count(s.teamID) as teamMembers, canBreak   from speaker s right join team t on t.teamid = s.teamID where t.tournamentID = '" + model.TournamentID + "' group by teamName, t.teamID, canBreak";
-            model.TeamTable = CompileTable(query);
+            model.TeamTable = sql.CompileTable(query);
             
             query = "select speakerName, institutionName, teamName from Speaker s join Institution i on s.institutionID = i.institutionID left join team t on s.teamID = t.teamID where s.tournamentID='" + model.TournamentID + "'";
-            model.SpeakerTable = CompileTable(query);
+            model.SpeakerTable = sql.CompileTable(query);
 
             query = "select adjName, institutionName, canbreak from adjudicator a join institution i on i.institutionID = a.institutionID where a.tournamentID='" + model.TournamentID + "'";
-            model.AdjTable = CompileTable(query);
+            model.AdjTable = sql.CompileTable(query);
 
             query = "select  institutionName, count(distinct speakerName)+count(distinct adjName) as NumberOfDebators from Institution i left join Adjudicator a on a.institutionID = i.institutionID left join Speaker s on s.institutionID = i.institutionID where s.tournamentID='" + model.TournamentID + "' or a.tournamentID='" + model.TournamentID + "' group by  institutionName";
-            model.InstitutionTable = CompileTable(query);
+            model.InstitutionTable = sql.CompileTable(query);
 
             query = "select venueName as Venue from venue v where v.tournamentID='" + model.TournamentID + "'";
-            model.VenueTable = CompileTable(query);
+            model.VenueTable = sql.CompileTable(query);
 
             query = "select Name, rolename as Role from admin a join role r on a.roleID = r.roleID where a.tournamentID='" + model.TournamentID + "'";
-            model.OrgcomTable = CompileTable(query);
+            model.OrgcomTable = sql.CompileTable(query);
         }
         
-        private DataTable CompileTable(string query)
-        {
-            DataTable table = new DataTable();
-            try
-            {
-                using (SqlConnection con = getConnection())
-                {
-                    con.Open();
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-                    SqlCommandBuilder comm = new SqlCommandBuilder(adapter);
-
-                    table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                    adapter.Fill(table);
-                }
-            }
-            catch (SqlException)
-            {
-
-            }
-            return table;
-        }
-
-        private SqlConnection getConnection()
-        {
-            try
-            {
-                var connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["BYDatabase"].ConnectionString;
-                SqlConnection connection = new SqlConnection(connectionstring);
-                return connection;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        private List<string> CompileList(string query)
-        {
-            List<string> list = new List<string>();
-
-            using (SqlConnection con = getConnection())
-            {
-                using (SqlCommand comm = new SqlCommand(query, con))
-                {
-                    con.Open();
-                    SqlDataReader rdr = comm.ExecuteReader();
-
-                    while (rdr.Read())
-                    {
-                        list.Add(rdr.GetString(0));
-                    }
-                }
-            }
-            return list;
-        }
+        
         
         private string Item(List<string> list)
         {

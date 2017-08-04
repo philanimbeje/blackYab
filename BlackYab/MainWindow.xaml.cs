@@ -20,6 +20,7 @@ namespace BlackYab
     /// </summary>
     public partial class MainWindow : Window
     {
+        ErrorResponse errorResponse = new ErrorResponse();
         public MainWindow()
         {
             InitializeComponent();
@@ -31,9 +32,9 @@ namespace BlackYab
             string password = passwordBoxLogin.Password;
 
             Authenticator authenticator = new Authenticator();
-            bool loginAuthentication = authenticator.LoginAuthenticator(username, password);
+            errorResponse = authenticator.LoginAuthenticator(username, password);
 
-            if (loginAuthentication==true)
+            if (errorResponse.AccessBool==true)
             {
                 HomePage home = new BlackYab.HomePage();
                 this.Close();
@@ -41,7 +42,7 @@ namespace BlackYab
             }
             else
             {
-                MessageBox.Show("Username does not exist\nPlease try again");
+                MessageBox.Show(errorResponse.ErrorType+"\nPlease try again");
             }
         }
 
@@ -58,7 +59,7 @@ namespace BlackYab
 
             Authenticator authenticator = new Authenticator();
 
-            string register_tournament = authenticator.RegAuthenticator(username, name, password, t_name, rounds, break_round, start_date, end_date);
+            /*string register_tournament = authenticator.RegAuthenticator(username, name, password, t_name, rounds, break_round, start_date, end_date);
             bool error_response = authenticator.ErrorResponse(register_tournament);
             if (error_response == true)
             {
@@ -67,7 +68,7 @@ namespace BlackYab
             else
             {
                 MessageBox.Show("Tournament was not registered\n"+ register_tournament + "\nPlease try again");
-            }
+            }*/
 
         }
     }
