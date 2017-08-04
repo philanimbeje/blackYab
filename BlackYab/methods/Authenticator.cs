@@ -11,14 +11,16 @@ namespace BlackYab
     class Authenticator
     {
         Sqlfunctions sql = new Sqlfunctions();
+        ErrorResponse error;
 
+        //not sure if i need this function, its behaving like a middle-man method---this is smelly
         public ErrorResponse LoginAuthenticator(string username, string password)
         {
-            ErrorResponse error = new ErrorResponse();
-            return Login(username, password, error);
+            //TODO: checked for empty textboxes
+            return Login(username, password);
         }
 
-        public ErrorResponse Login(string name, string password, ErrorResponse error)
+        private ErrorResponse Login(string name, string password)
         {
             int count = 0;
             string Username = "";
@@ -34,7 +36,7 @@ namespace BlackYab
                 command.Parameters.AddWithValue("@name", name);
                 command.Parameters.AddWithValue("@password", password);
 
-                if (connection != null)
+                if (connection != null) 
                 {
                     connection.Open();
                     SqlDataReader rdr = command.ExecuteReader();
@@ -63,8 +65,7 @@ namespace BlackYab
                 }
                 else
                 {
-                    error.AccessBool = false;
-                    error.ErrorType = "database connection issue";
+                    error = new ErrorResponse(false, "database connection issue");
                     return error;
                 }
 
@@ -86,21 +87,18 @@ namespace BlackYab
 
                     Application.Current.Properties["Model"] = model;
 
-                    error.AccessBool = true;
-                    error.ErrorType = "Login successfull";
+                    error = new ErrorResponse(true);
                     return error;
                 }
                 else
                 {
-                    error.AccessBool = false;
-                    error.ErrorType = "User information inconsistancy";
+                    error = new ErrorResponse(false, "User information inconsistancy");
                     return error;
                 }
             }
             else
             {
-                error.AccessBool = false;
-                error.ErrorType = "User does not exist";
+                error = new ErrorResponse(false, "User does not exist");
                 return error;
             }
         }

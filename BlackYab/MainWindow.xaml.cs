@@ -42,7 +42,7 @@ namespace BlackYab
             }
             else
             {
-                MessageBox.Show(errorResponse.ErrorType+"\nPlease try again");
+                MessageBox.Show(errorResponse.ErrorMessage+"\nPlease try again");
             }
         }
 
