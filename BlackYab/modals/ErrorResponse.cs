@@ -14,7 +14,7 @@ namespace BlackYab
         public ErrorResponse()
         {
             this.AccessBool = false;
-            this.ErrorMessage = "No arguments recieved";
+            this.ErrorMessage = "undescribed error detected";
         }
 
         public ErrorResponse(bool access, string message)
