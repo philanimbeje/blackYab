@@ -63,6 +63,20 @@ namespace BlackYab
             query = "select Name, rolename as Role from admin a join role r on a.roleID = r.roleID where a.tournamentID='" + model.TournamentID + "'";
             model.OrgcomTable = sql.CompileTable(query);
         }
+
+        public string RequestInfo(Model model, string request, string Qvariable)
+        {
+            string info = "";
+            var infoList = new List<string>();
+            switch (request)
+            {
+                case "getTeamID": infoList = sql.CompileList("select teamID from team where tournamentID='" + model.TournamentID + "' and teamName='"+ Qvariable +"'");
+                    info=Item(infoList); break;
+            }
+
+
+            return info;
+        }
         
         
         

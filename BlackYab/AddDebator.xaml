@@ -14,7 +14,7 @@
         <Color x:Key="Color1">#FF464545</Color>
     </Window.Resources>
     <Grid>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="209,228,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click" />
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="209,228,0,0" VerticalAlignment="Top" Width="75" />
         <TextBox x:Name="txtBoxAddName" HorizontalAlignment="Left" Height="23" Margin="13,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="#FF080808"/>
         <ComboBox x:Name="comboBoxAddInstitution"  HorizontalAlignment="Left" Margin="155,81,0,0" VerticalAlignment="Top" Width="120" Foreground="#FF080808" >
 
@@ -23,11 +23,13 @@
         <Label x:Name="label1" Content="Name" HorizontalAlignment="Left" Margin="13,55,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="129,228,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF060606" Click="btnAdd_Click"/>
         <Label x:Name="label2" Content="Add Debater" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <RadioButton x:Name="radioButtonAddSpeaker" Content="Speaker" HorizontalAlignment="Left" Margin="13,126,0,0" VerticalAlignment="Top" Foreground="White" />
-        <RadioButton x:Name="radioButtonAddAdj" Content="Adjudicator" HorizontalAlignment="Left" Margin="155,126,0,0" VerticalAlignment="Top" Foreground="White" />
+        <RadioButton x:Name="radioButtonAddSpeaker" Content="Speaker" HorizontalAlignment="Left" Margin="13,126,0,0" VerticalAlignment="Top" Foreground="White" GroupName="SpkAdj" />
+        <RadioButton x:Name="radioButtonAddAdj" Content="Adjudicator" HorizontalAlignment="Left" Margin="155,126,0,0" VerticalAlignment="Top" Foreground="White" GroupName="SpkAdj" />
         <ComboBox x:Name="comboBoxAddTeams" HorizontalAlignment="Left" Margin="13,185,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" />
         <Label x:Name="label1_Copy" Content="Team" HorizontalAlignment="Left" Margin="13,159,0,0" VerticalAlignment="Top" Foreground="White"/>
         <CheckBox x:Name="checkBoxAddCanBreak" Content="Can Break" HorizontalAlignment="Left" Margin="155,164,0,0" VerticalAlignment="Top" IsChecked="True" IsEnabled="False" Foreground="White"/>
+        <RadioButton x:Name="radioButtonAddEFL" Content="EFL" HorizontalAlignment="Left" Margin="13,215,0,0" VerticalAlignment="Top" Foreground="White" GroupName="Category" />
+        <RadioButton x:Name="radioButtonAddESL" Content="ESL" HorizontalAlignment="Left" Margin="13,234,0,0" VerticalAlignment="Top" Foreground="White" GroupName="Category" />
 
     </Grid>
 </Window>

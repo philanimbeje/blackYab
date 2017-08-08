@@ -20,10 +20,9 @@ namespace BlackYab
     public partial class AddDebator : Window
     {
         Model model = (Model)Application.Current.Properties["Model"];
-        string[] institutions;
-        string[] teams;
 
         InputFunctions input = new InputFunctions();
+        GetFunctions get = new GetFunctions();
 
         public AddDebator()
         {
@@ -33,29 +32,36 @@ namespace BlackYab
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var details = new List<string>();
-
             string name = txtBoxAddName.Text;
-            details.Add(name);
             string institution = comboBoxAddInstitution.Text;
             string team = comboBoxAddTeams.Text;
+            string category= Convert.ToString(radioButtonAddEFL.IsChecked);
             string canbreak = Convert.ToString(checkBoxAddCanBreak.IsChecked);
             string isSpeaker = Convert.ToString(radioButtonAddSpeaker.IsChecked);
-            string debatorType = "";
+           
+            //validation function
 
             if (isSpeaker=="true")
             {
-                debatorType = "addSpeaker";
+                details.Add(name);
+                details.Add(institution);
+                details.Add(category);
+                details.Add(get.RequestInfo(model, "getTeamID", team));
+                details.Add(Convert.ToString(model.TournamentID));
+                details.Add(Convert.ToString(DateTime.Now));
+
                 input.data(details, model, "addSpeaker");
 
             }
             if(isSpeaker=="false")
             {
-                debatorType = "addAdjudicator";
+                details.Add(name);
+                details.Add(institution);
+                details.Add(Convert.ToString(model.TournamentID));
+                details.Add(canbreak);
+
                 input.data(details, model, "addAdjudicator");
             }
-
-            //validation function
-            //input function call
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
