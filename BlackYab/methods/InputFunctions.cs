@@ -11,33 +11,20 @@ namespace BlackYab
 {
     class InputFunctions
     {
-        private string[] inputString { get; set; }
+
+        private List<string> inputString { get; set; }
         private Model info { get; set; }
         private string commandString { get; set; }
+        Sqlfunctions sql = new Sqlfunctions();
 
-
-        public void data(string[] details, Model information, string cmdAction)
+        public void data(List<string> details, Model information, string cmdAction)
         {
             this.inputString = details;
             this.info = information;
             this.commandString = cmdAction;
             commandFunction();
         }
-
-        private SqlConnection getConnection()
-        {
-            try
-            {
-                var connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["BlackYAB"].ConnectionString;
-                SqlConnection connection = new SqlConnection(connectionstring);
-                return connection;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
+        
         private SqlCommand Action(SqlCommand cmd)
         {
 
@@ -82,7 +69,7 @@ namespace BlackYab
 
         private void commandFunction()
         {
-            using (SqlConnection reg = getConnection())
+            using (SqlConnection reg = sql.getConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(this.commandString, reg))
                 {
@@ -260,10 +247,10 @@ namespace BlackYab
         
         private SqlCommand addTeamCommands(SqlCommand cmd)
         {
-            cmd.Parameters.Add("@teamName", SqlDbType.VarChar).Value = inputString[0];
+            /*cmd.Parameters.Add("@teamName", SqlDbType.VarChar).Value = inputString[0];
             cmd.Parameters.Add("@tournamentID", SqlDbType.Int).Value = info.TournamentID;
             cmd.Parameters.Add("@canBreak", SqlDbType.Char).Value = inputString[1];
-            cmd.Parameters.Add("@dateCreated", SqlDbType.DateTime).Value = DateTime.Now;
+            cmd.Parameters.Add("@dateCreated", SqlDbType.DateTime).Value = DateTime.Now;*/
 
             return cmd;
         }

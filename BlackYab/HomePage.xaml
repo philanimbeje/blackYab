@@ -52,7 +52,7 @@
                     <Label x:Name="label1" HorizontalContentAlignment="Center" Content="Tournament Summary" HorizontalAlignment="Left" Margin="0,38,0,0" VerticalAlignment="Top" Width="207" FontSize="18" FontWeight="Bold"/>
                     <Label x:Name="label1_Copy1" HorizontalContentAlignment="Center" Content="Current Round" HorizontalAlignment="Left" Margin="0,342,0,0" VerticalAlignment="Top" Width="207" FontSize="18" FontWeight="Bold"/>
                     <Label x:Name="labelRound" HorizontalContentAlignment="Center" Content="100" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="195" FontSize="48" FontWeight="Bold" Height="88"/>
-                    <Button x:Name="buttonEditDebator" Content="Edit Debator" HorizontalAlignment="Left" Margin="1085,112,0,0" VerticalAlignment="Top" Width="112" BorderBrush="White" Foreground="White">
+                    <Button x:Name="buttonEditDebator" Content="Edit Debator" HorizontalAlignment="Left" Margin="1085,112,0,0" VerticalAlignment="Top" Width="112" BorderBrush="White" Foreground="White" Click="buttonEditDebator_Click">
                         <Button.Background>
                             <SolidColorBrush Color="#FF588D58"/>
                         </Button.Background>

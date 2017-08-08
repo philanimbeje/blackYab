@@ -19,12 +19,36 @@ namespace BlackYab
     /// </summary>
     public partial class HomePage : Window
     {
+
         Model model = (Model)Application.Current.Properties["Model"];
 
+        AdminDisplay display = new AdminDisplay();
         public HomePage()
         {
             InitializeComponent();
-            
+            TournamentSummary();
+            AdminViews();
+        }
+
+        private void buttonLogOff_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new BlackYab.MainWindow();
+            this.Close();
+            main.Show();
+        }
+
+        private void AdminViews()
+        {
+            dataGridVTeam.DataContext = model.TeamTable.DefaultView;
+            dataGridVAdjudicators.DataContext = model.AdjTable.DefaultView;
+            dataGridVInstitution.DataContext = model.InstitutionTable.DefaultView;
+            dataGridVOrgcom.DataContext = model.OrgcomTable.DefaultView;
+            dataGridVRooms.DataContext = model.VenueTable.DefaultView;
+            dataGridVSpeakers.DataContext = model.SpeakerTable.DefaultView;
+        }
+
+        private void TournamentSummary()
+        {
             labelTName.Content = model.TournamentName;
             labelRound.Content = model.CurrentRound;
             labelLoggedIn.Content = model.AdminName;
@@ -34,20 +58,12 @@ namespace BlackYab
             labelTeams.Content = model.TotalTeams;
             labelIncompleteTeams.Content = -1;
             labelAdjudicators.Content = model.TotalAdjudicators;
-
-            dataGridVTeam.DataContext = model.TeamTable.DefaultView;
-            dataGridVAdjudicators.DataContext = model.AdjTable.DefaultView;
-            dataGridVInstitution.DataContext = model.InstitutionTable.DefaultView;
-            dataGridVOrgcom.DataContext = model.OrgcomTable.DefaultView;
-            dataGridVRooms.DataContext = model.VenueTable.DefaultView;
-            dataGridVSpeakers.DataContext = model.SpeakerTable.DefaultView;
         }
 
-        private void buttonLogOff_Click(object sender, RoutedEventArgs e)
+        private void buttonEditDebator_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new BlackYab.MainWindow();
-            this.Close();
-            main.Show();
+            AddDebator debator = new AddDebator();
+            debator.ShowDialog();
         }
     }
 }
