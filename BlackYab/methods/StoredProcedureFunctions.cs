@@ -9,13 +9,13 @@ using System.Data.SqlClient;
 
 namespace BlackYab
 {
-    class InputFunctions
+    class StoredProcedureFunctions
     {
 
         private List<string> inputString { get; set; }
         private Model info { get; set; }
         private string cmdAction { get; set; }
-        Sqlfunctions sql = new Sqlfunctions();
+        Sqlfunctions sql = new Sqlfunctions(); 
 
         public void Data(List<string> inputString, Model information, string cmdAction)
         {

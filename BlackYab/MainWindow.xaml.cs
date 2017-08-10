@@ -31,7 +31,7 @@ namespace BlackYab
             string username = txtUserNameLogin.Text;
             string password = passwordBoxLogin.Password;
 
-            Authenticator authenticator = new Authenticator();
+            DataAuthenticator authenticator = new DataAuthenticator();
             errorResponse = authenticator.LoginAuthenticator(username, password);
 
             if (errorResponse.AccessBool==true)
@@ -57,7 +57,7 @@ namespace BlackYab
             string start_date = RegStartDate.Text;
             string end_date = RegEndDate.Text;
 
-            Authenticator authenticator = new Authenticator();
+            DataAuthenticator authenticator = new DataAuthenticator();
 
             /*string register_tournament = authenticator.RegAuthenticator(username, name, password, t_name, rounds, break_round, start_date, end_date);
             bool error_response = authenticator.ErrorResponse(register_tournament);

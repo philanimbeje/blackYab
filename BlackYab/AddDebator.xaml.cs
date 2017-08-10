@@ -21,7 +21,7 @@ namespace BlackYab
     {
         Model model = (Model)Application.Current.Properties["Model"];
 
-        InputFunctions input = new InputFunctions();
+        StoredProcedureFunctions input = new StoredProcedureFunctions();
         GetFunctions get = new GetFunctions();
 
         public AddDebator()

@@ -8,10 +8,10 @@ using System.Windows;
 
 namespace BlackYab
 {
-    class Authenticator
+    class DataAuthenticator
     {
         Sqlfunctions sql = new Sqlfunctions();
-        ErrorResponse error;
+        ErrorResponse error; 
 
         //not sure if i need this function, its behaving like a middle-man method---this is smelly
         public ErrorResponse LoginAuthenticator(string username, string password)

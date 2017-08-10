@@ -70,7 +70,7 @@ namespace BlackYab
             var infoList = new List<string>();
             switch (request)
             {
-                case "getTeamID": infoList = sql.CompileList("select teamID from team where tournamentID='" + model.TournamentID + "' and teamName='"+ Qvariable +"'");
+                case "getTeamID": infoList = sql.CompileList("select teamID from team where tournamentID='" + model.TournamentID + "' and teamName='"+ Qvariable[0] +"'");
                     info=Item(infoList); break;
             }
 
