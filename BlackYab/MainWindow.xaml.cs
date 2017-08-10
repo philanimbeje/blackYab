@@ -31,8 +31,13 @@ namespace BlackYab
             string username = txtUserNameLogin.Text;
             string password = passwordBoxLogin.Password;
 
-            DataAuthenticator authenticator = new DataAuthenticator();
-            errorResponse = authenticator.LoginAuthenticator(username, password);
+            var loginDetails = new List<string>();
+
+            loginDetails.Add(username);
+            loginDetails.Add(password);
+
+            DataAuthenticator authenticator = new DataAuthenticator("Login", loginDetails);
+            errorResponse = authenticator.error;
 
             if (errorResponse.AccessBool==true)
             {
@@ -57,19 +62,28 @@ namespace BlackYab
             string start_date = RegStartDate.Text;
             string end_date = RegEndDate.Text;
 
-            DataAuthenticator authenticator = new DataAuthenticator();
+            var registrationDetails = new List<string>();
 
-            /*string register_tournament = authenticator.RegAuthenticator(username, name, password, t_name, rounds, break_round, start_date, end_date);
-            bool error_response = authenticator.ErrorResponse(register_tournament);
-            if (error_response == true)
+            registrationDetails.Add(username);
+            registrationDetails.Add(name);
+            registrationDetails.Add(password);
+            registrationDetails.Add(t_name);
+            registrationDetails.Add(rounds);
+            registrationDetails.Add(break_round);
+            registrationDetails.Add(start_date);
+            registrationDetails.Add(end_date);
+
+            DataAuthenticator authenticator = new DataAuthenticator("Register", registrationDetails);
+            errorResponse = authenticator.error;
+
+            if (errorResponse.AccessBool == true)
             {
-                
+               
             }
             else
             {
-                MessageBox.Show("Tournament was not registered\n"+ register_tournament + "\nPlease try again");
-            }*/
-
+                MessageBox.Show(errorResponse.ErrorMessage + "\nPlease try again");
+            }
         }
     }
 }

@@ -11,29 +11,80 @@ namespace BlackYab
     class DataAuthenticator
     {
         Sqlfunctions sql = new Sqlfunctions();
-        ErrorResponse error; 
+        //ErrorResponse error = new ErrorResponse();
 
-        //not sure if i need this function, its behaving like a middle-man method---this is smelly
-        public ErrorResponse LoginAuthenticator(string username, string password)
+        private string username { get; set; }
+        private string password { get; set; }
+
+        private string name { get; set; }
+        private string t_name { get; set; }
+        private string rounds { get; set; }
+        private string break_round { get; set; }
+        private string start_date { get; set; }
+        private string end_date { get; set; }
+
+        public ErrorResponse error { get; set; }
+
+
+
+        public DataAuthenticator(string AutheticateRequest, List<string> registerDetails)
         {
-            //TODO: checked for empty textboxes
-            return Login(username, password);
+            
+
+            switch(AutheticateRequest)
+            {
+                case "Login":
+                    username = registerDetails[0];
+                    password = registerDetails[1];
+                    error = LoginAuthenticator();
+                    break;
+                case "Register":
+                    username = registerDetails[0];
+                    name = registerDetails[1];
+                    password = registerDetails[2];
+                    t_name = registerDetails[3];
+                    rounds = registerDetails[4];
+                    break_round = registerDetails[5];
+                    start_date = registerDetails[6];
+                    end_date = registerDetails[7];
+                    error = RegisterAuthenticator();
+                    break;
+                default: error= new ErrorResponse();
+                    break;
+            }
         }
 
-        private ErrorResponse Login(string name, string password)
+        private DataAuthenticator()
+        {
+            error = new ErrorResponse();
+        }
+
+        //not sure if i need this function, its behaving like a middle-man method---this is smelly
+        private ErrorResponse LoginAuthenticator()
+        {
+            //TODO: checked for empty textboxes
+            return Login();
+        }
+
+        private ErrorResponse RegisterAuthenticator()
+        {
+            return Register();
+        }
+
+        private ErrorResponse Login()
         {
             int count = 0;
-            string Username = "";
+            string UsernameHold = "";
             string Pass = "";
             string Fullname = "";
             int Tid = 0;
-            int role = 0;
+            int role = 0; 
             char Access = 'N';
 
             using (SqlConnection connection = sql.getConnection())
             {
                 SqlCommand command = new SqlCommand("select * from admin where username=@name and password=@password", connection);
-                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@name", username);
                 command.Parameters.AddWithValue("@password", password);
 
                 if (connection != null) 
@@ -43,7 +94,7 @@ namespace BlackYab
 
                     while (rdr.Read())
                     {
-                        string username = rdr.GetString(0);
+                        string user_name = rdr.GetString(0);
                         string userpassword = rdr.GetString(1);
                         string fullname = rdr.GetString(2);
                         int tournamentID = rdr.GetInt32(3);
@@ -51,10 +102,10 @@ namespace BlackYab
                         char canAccess = Convert.ToChar(rdr.GetString(5));
 
 
-                        if (username == name && userpassword == password)   //check if login details are correct
+                        if (user_name == username && userpassword == password)   //check if login details are correct
                         {
                             count++;
-                            Username = username;
+                            UsernameHold = user_name;
                             Pass = userpassword;
                             Fullname = fullname;
                             Tid = tournamentID;
@@ -79,7 +130,7 @@ namespace BlackYab
                     GetFunctions get = new BlackYab.GetFunctions();
 
                     model.AdminName = Fullname;
-                    model.UserName = Username;
+                    model.UserName = UsernameHold;
                     model.canAccess = Access;
                     model.TournamentID = Tid;
                     model.RoleID = role;
@@ -103,12 +154,12 @@ namespace BlackYab
             }
         }
 
-        /*public ErrorResponse RegAuthenticator(ErrorResponse error, string username, string name, string password, string t_name, string rounds, string break_round, string start_date, string end_date)
+        public ErrorResponse Register()
         {
             //empty fields
             //data validation
-            //existance chack 
+            //existance check 
             return error;
-        }*/
+        }
     }
 }
