@@ -50,7 +50,7 @@ namespace BlackYab
                 details.Add(Convert.ToString(model.TournamentID));
                 details.Add(Convert.ToString(DateTime.Now));
 
-                input.Data(details, model, WordList.addSpeaker);
+                input.InputData(details, model, WordList.addSpeaker);
 
             }
             else
@@ -60,7 +60,7 @@ namespace BlackYab
                 details.Add(Convert.ToString(model.TournamentID));
                 details.Add(canbreak);
 
-                input.Data(details, model, WordList.addAdjudicator);
+                input.InputData(details, model, WordList.addAdjudicator);
             }
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Windows;
 
 namespace BlackYab
 {
@@ -17,15 +17,46 @@ namespace BlackYab
         private WordList cmdAction { get; set; }
         Sqlfunctions sql = new Sqlfunctions(); 
 
-        public void Data(List<string> inputString, Model information, WordList cmdAction)
+        public void InputData(List<string> inputString, Model information, WordList cmdAction)
         {
             this.inputString = inputString;
             this.info = information;
             this.cmdAction = cmdAction;
-            commandFunction();
+            commandFunction(); 
         }
-        
-        private SqlCommand Action(SqlCommand cmd)
+
+        public DataTable getData(List<string> inputString, Model information, WordList cmdAction)
+        {
+            this.inputString = inputString;
+            this.info = information;
+            this.cmdAction = cmdAction;
+            return CompileTable();
+        }
+
+        private DataTable CompileTable()
+        {
+            DataTable table = new DataTable();
+            try
+            {
+                using (SqlConnection con = sql.getConnection())
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(Convert.ToString(cmdAction), con))
+                    {
+                        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                        table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                        adapter.Fill(table);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+
+            }
+            return table;
+        }//returns datatable from sent query 
+
+        private SqlCommand StoredProcedureAction(SqlCommand cmd)
         {
 
             switch(this.cmdAction)
@@ -62,26 +93,41 @@ namespace BlackYab
                 case WordList.reportSpeakers: reportSPEAKERSCommands(cmd); break;
                 case WordList.reportTeams: reportTEAMSCommands(cmd); break;
                 case WordList.reportVenues : reportVENUESCommands(cmd); break;
+                case WordList.Login : loginCommands(cmd); break;
+                default: break;
             }
             return cmd;
         }
 
         private void commandFunction()
         {
-            using (SqlConnection reg = sql.getConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand(Convert.ToString(cmdAction), reg))
+                using (SqlConnection con = sql.getConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand(Convert.ToString(cmdAction), con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    reg.Open();
-                    Action(cmd).ExecuteNonQuery();
+                        con.Open();
+                        StoredProcedureAction(cmd).ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (SqlException)
+            {
+
             }
         }
 
-
         #region Stored Procedure Functions
+        private SqlCommand loginCommands(SqlCommand cmd)
+        {
+            cmd.Parameters.Add("@username", SqlDbType.VarChar).Value = inputString[0];
+            cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = inputString[1];
+            return cmd;
+        }
+
         private SqlCommand reportVENUESCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);

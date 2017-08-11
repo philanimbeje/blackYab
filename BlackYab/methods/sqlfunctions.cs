@@ -11,6 +11,7 @@ namespace BlackYab
 {
     class Sqlfunctions
     {
+        StoredProcedureFunctions sqlProceedure = new StoredProcedureFunctions();
         public SqlConnection getConnection()
         {
             try
@@ -25,16 +26,17 @@ namespace BlackYab
             }
         }//establish sql connection
 
-        public DataTable CompileTable(string query)
+        /*public DataTable CompileTable(List<string> inputString, Model model, WordList query)
         {
             DataTable table = new DataTable();
             try
             {
                 using (SqlConnection con = getConnection())
                 {
+                    sqlProceedure.GetData(inputString, model, query).CommandType = CommandType.StoredProcedure
                     con.Open();
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+                    SqlDataAdapter adapter = new SqlDataAdapter(sqlProceedure.GetData(inputString, model, query), con);
                     SqlCommandBuilder comm = new SqlCommandBuilder(adapter);
 
                     table.Locale = System.Globalization.CultureInfo.InvariantCulture;
@@ -46,7 +48,7 @@ namespace BlackYab
 
             }
             return table;
-        }//returns datatable from sent query
+        }//returns datatable from sent query*/
 
         public List<string> CompileList(string query)
         {

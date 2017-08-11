@@ -46,7 +46,16 @@ namespace BlackYab
         getTeamID,
         User_does_not_exist,
         Database_connection_issue,
-        User_information_inconsistancy
+        User_information_inconsistancy,
+        Undescribed_error_detected,
+        Login_successful,
+        TeamTable,
+        SpeakerTable,
+        AdjudicatorjTable,
+        InstitutionTable,
+        VenueTable,
+        OrgcomTable,
+        LoginTable
 
     };
     
