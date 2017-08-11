@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using System.Windows;
 
 namespace BlackYab
 {
     class StoredProcedureFunctions
     {
-
         private List<string> inputString { get; set; }
         private Model info { get; set; }
         private WordList cmdAction { get; set; }
-        Sqlfunctions sql = new Sqlfunctions(); 
-
         public void InputData(List<string> inputString, Model information, WordList cmdAction)
         {
             this.inputString = inputString;
@@ -24,7 +17,6 @@ namespace BlackYab
             this.cmdAction = cmdAction;
             commandFunction(); 
         }
-
         public DataTable getData(List<string> inputString, Model information, WordList cmdAction)
         {
             this.inputString = inputString;
@@ -32,33 +24,32 @@ namespace BlackYab
             this.cmdAction = cmdAction;
             return CompileTable();
         }
-
+        public DataTable getData(List<string> inputString, WordList cmdAction)
+        {
+            this.inputString = inputString;
+            this.cmdAction = cmdAction;
+            return CompileTable();
+        }
         private DataTable CompileTable()
         {
+            var sql = new Sqlfunctions();
             DataTable table = new DataTable();
             try
             {
-                using (SqlConnection con = sql.getConnection())
-                {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(Convert.ToString(cmdAction), con))
-                    {
-                        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-                        table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                        adapter.Fill(table);
-                    }
-                }
+                var con = sql.getConnection();
+                var cmd = new SqlCommand(Convert.ToString(cmdAction), con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                var adapter = new SqlDataAdapter(StoredProcedureAction(cmd));
+                //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                adapter.Fill(table);
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
             }
             return table;
         }//returns datatable from sent query 
-
-        private SqlCommand StoredProcedureAction(SqlCommand cmd)
+        public SqlCommand StoredProcedureAction(SqlCommand cmd)
         {
-
             switch(this.cmdAction)
             {
                 case WordList.addTeam:  addTeamCommands(cmd); break;
@@ -94,13 +85,14 @@ namespace BlackYab
                 case WordList.reportTeams: reportTEAMSCommands(cmd); break;
                 case WordList.reportVenues : reportVENUESCommands(cmd); break;
                 case WordList.Login : loginCommands(cmd); break;
+                case WordList.primeModelInformation: primeModelInformation(cmd); break;
                 default: break;
             }
             return cmd;
         }
-
         private void commandFunction()
         {
+            var sql = new Sqlfunctions();
             try
             {
                 using (SqlConnection con = sql.getConnection())
@@ -108,7 +100,6 @@ namespace BlackYab
                     using (SqlCommand cmd = new SqlCommand(Convert.ToString(cmdAction), con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-
                         con.Open();
                         StoredProcedureAction(cmd).ExecuteNonQuery();
                     }
@@ -116,60 +107,56 @@ namespace BlackYab
             }
             catch (SqlException)
             {
-
             }
         }
-
         #region Stored Procedure Functions
+        private SqlCommand primeModelInformation(SqlCommand cmd)
+        {
+            cmd.Parameters.Add("@username", SqlDbType.VarChar).Value = inputString[0];
+            cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = inputString[1];
+            return cmd;
+        }
         private SqlCommand loginCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@username", SqlDbType.VarChar).Value = inputString[0];
             cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = inputString[1];
             return cmd;
         }
-
         private SqlCommand reportVENUESCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand reportTEAMSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand reportSPEAKERSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand reportROUNDSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand reportINSTITUTIONSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand reportADMINCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand reportADJUDICATORSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand newSessionCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@username", SqlDbType.VarChar).Value = inputString[0];
@@ -177,55 +164,46 @@ namespace BlackYab
             cmd.Parameters.Add("@sessionStart", SqlDbType.VarChar).Value = DateTime.Now;
             return cmd;
         }
-
         private SqlCommand endSessionCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@sessionEnd", SqlDbType.VarChar).Value = DateTime.Now;
             return cmd;
         }
-
         private SqlCommand currentRoundCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand adminVENUECommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand adminTEAMCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand adminSPEAKERSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand adminORGCOMCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand adminINSTITUTIONSCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand adminADJUDICATORECommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
             return cmd;
         }
-
         private SqlCommand addTeamDebateCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@debateID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -233,7 +211,6 @@ namespace BlackYab
             cmd.Parameters.Add("@positionID", SqlDbType.Int).Value = Convert.ToInt32(inputString[2]);
             return cmd;
         }
-
         private SqlCommand addpeakerScoreCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@debateID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -242,7 +219,6 @@ namespace BlackYab
             cmd.Parameters.Add("@score", SqlDbType.Int).Value = Convert.ToInt32(inputString[3]);
             return cmd;
         }
-
         private SqlCommand addSpeakerCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@speakerName", SqlDbType.VarChar).Value = inputString[0];
@@ -253,7 +229,6 @@ namespace BlackYab
             cmd.Parameters.Add("@dateCreated", SqlDbType.DateTime).Value = Convert.ToDateTime(inputString[5]);
             return cmd;
         }
-
         private SqlCommand addRoundTabCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@roundNumber", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -266,7 +241,6 @@ namespace BlackYab
             cmd.Parameters.Add("@tournamnetID", SqlDbType.Int).Value = Convert.ToInt32(inputString[7]);
             return cmd;
         }
-
         private SqlCommand addRoundCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@roundNumber", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -275,7 +249,6 @@ namespace BlackYab
             cmd.Parameters.Add("@currentround", SqlDbType.Char).Value = Convert.ToChar(inputString[3]);
             return cmd;
         }
-
         private SqlCommand addNewVenueCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@venueName", SqlDbType.VarChar).Value = inputString[0];
@@ -283,7 +256,6 @@ namespace BlackYab
             cmd.Parameters.Add("@datecreated", SqlDbType.DateTime).Value = Convert.ToDateTime(inputString[2]);
             return cmd;
         }
-
         private SqlCommand addNewTournamentCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@Tname", SqlDbType.VarChar).Value = inputString[0];
@@ -293,7 +265,6 @@ namespace BlackYab
             cmd.Parameters.Add("@Tend", SqlDbType.DateTime).Value = Convert.ToDateTime(inputString[4]);
             return cmd;
         }
-
         private SqlCommand addNewRoleCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@roleName", SqlDbType.VarChar).Value = inputString[0];
@@ -301,7 +272,6 @@ namespace BlackYab
             cmd.Parameters.Add("@tID", SqlDbType.Int).Value = Convert.ToInt32(inputString[2]);
             return cmd;
         }
-
         private SqlCommand addMotionCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@roundNumber", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -309,14 +279,12 @@ namespace BlackYab
             cmd.Parameters.Add("@motion", SqlDbType.VarChar).Value = inputString[2];
             return cmd;
         }
-
         private SqlCommand addInstitutionCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@institutionName", SqlDbType.VarChar).Value = inputString[0];
             cmd.Parameters.Add("@local", SqlDbType.Char).Value = Convert.ToChar(inputString[1]);
             return cmd;
         }
-
         private SqlCommand addDebateCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@roundNumber", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -325,7 +293,6 @@ namespace BlackYab
             cmd.Parameters.Add("@venueID", SqlDbType.Int).Value = Convert.ToInt32(inputString[3]);
             return cmd;
         }
-
         private SqlCommand addAdminCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@Username", SqlDbType.VarChar).Value = inputString[0];
@@ -337,7 +304,6 @@ namespace BlackYab
             cmd.Parameters.Add("@access", SqlDbType.Int).Value = Convert.ToChar(inputString[6]);
             return cmd;
         }
-
         private SqlCommand addAdjudicatorCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@adjName", SqlDbType.VarChar).Value = inputString[0];
@@ -346,7 +312,6 @@ namespace BlackYab
             cmd.Parameters.Add("@canBreak", SqlDbType.Char).Value = Convert.ToChar(inputString[3]);
             return cmd;
         }
-
         private SqlCommand addAdjScoreCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@debateID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -355,7 +320,6 @@ namespace BlackYab
             cmd.Parameters.Add("@score", SqlDbType.Int).Value = Convert.ToInt32(inputString[2]);
             return cmd;
         }
-
         private SqlCommand addAdjDebateCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@debateID", SqlDbType.Int).Value = Convert.ToInt32(inputString[0]);
@@ -363,7 +327,6 @@ namespace BlackYab
             cmd.Parameters.Add("@ischair", SqlDbType.Char).Value = Convert.ToChar(inputString[2]);
             return cmd;
         }
-        
         private SqlCommand addTeamCommands(SqlCommand cmd)
         {
             cmd.Parameters.Add("@teamName", SqlDbType.VarChar).Value = inputString[0];

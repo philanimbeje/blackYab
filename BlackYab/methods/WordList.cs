@@ -55,7 +55,8 @@ namespace BlackYab
         InstitutionTable,
         VenueTable,
         OrgcomTable,
-        LoginTable
+        LoginTable, 
+        primeModelInformation,
 
     };
     

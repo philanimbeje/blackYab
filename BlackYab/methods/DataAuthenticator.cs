@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,42 +12,46 @@ namespace BlackYab
     class DataAuthenticator
     {
         Sqlfunctions sql = new Sqlfunctions();
+        StoredProcedureFunctions ProcedureFunction = new StoredProcedureFunctions();
         //ErrorResponse error = new ErrorResponse();
         #region Properties
         private string username { get; set; }
         private string password { get; set; }
-
+        private List<string> loginDetails { get; set; }
         private string name { get; set; }
         private string t_name { get; set; }
         private string rounds { get; set; }
         private string break_round { get; set; }
         private string start_date { get; set; }
         private string end_date { get; set; }
+        private List<string> regDetails { get; set; } 
 
         public ErrorResponse error { get; set; }
         #endregion
 
         #region Constructors
-        public DataAuthenticator(WordList AutheticateRequest, List<string> registerDetails)
+        public DataAuthenticator(WordList AutheticateRequest, List<string> inputDetails)
         {
             
 
-            switch(AutheticateRequest)
+            switch(AutheticateRequest) 
             {
                 case WordList.Login:
-                    username = registerDetails[0];
-                    password = registerDetails[1];
+                    username = inputDetails[0];
+                    password = inputDetails[1];
+                    loginDetails = inputDetails;
                     error = LoginAuthenticator();
                     break;
                 case WordList.Register:
-                    username = registerDetails[0];
-                    name = registerDetails[1];
-                    password = registerDetails[2];
-                    t_name = registerDetails[3];
-                    rounds = registerDetails[4];
-                    break_round = registerDetails[5];
-                    start_date = registerDetails[6];
-                    end_date = registerDetails[7];
+                    username = inputDetails[0];
+                    name = inputDetails[1];
+                    password = inputDetails[2];
+                    t_name = inputDetails[3];
+                    rounds = inputDetails[4];
+                    break_round = inputDetails[5];
+                    start_date = inputDetails[6];
+                    end_date = inputDetails[7];
+                    regDetails = inputDetails;
                     error = RegisterAuthenticator();
                     break;
                 default: error= new ErrorResponse();
@@ -75,84 +80,35 @@ namespace BlackYab
 
         private ErrorResponse Login()
         {
-            int count = 0;
-            string UsernameHold = "";
-            string Pass = "";
-            string Fullname = "";
-            int Tid = 0;
-            int role = 0; 
-            char Access = 'N';
-
-            using (SqlConnection connection = sql.getConnection())
+            Model model = new Model();
+            var loginCheck = ProcedureFunction.getData(loginDetails, WordList.Login);
+            bool emptyCheckTable = loginCheck.Rows.Count == 0;
+            if(emptyCheckTable)
             {
-                SqlCommand command = new SqlCommand("select * from admin where username=@name and password=@password", connection);
-                command.Parameters.AddWithValue("@name", username);
-                command.Parameters.AddWithValue("@password", password);
-
-                if (connection != null) 
-                {
-                    connection.Open();
-                    SqlDataReader rdr = command.ExecuteReader();
-
-                    while (rdr.Read())
-                    {
-                        string user_name = rdr.GetString(0);
-                        string userpassword = rdr.GetString(1);
-                        string fullname = rdr.GetString(2);
-                        int tournamentID = rdr.GetInt32(3);
-                        int roleID = rdr.GetInt32(4);
-                        char canAccess = Convert.ToChar(rdr.GetString(5));
-
-
-                        if (user_name == username && userpassword == password)   //check if login details are correct
-                        {
-                            count++;
-                            UsernameHold = user_name;
-                            Pass = userpassword;
-                            Fullname = fullname;
-                            Tid = tournamentID;
-                            role = roleID;
-                            Access = canAccess;
-                        }
-                    }
-                }
-                else
-                {
-                    error = new ErrorResponse(false, WordList.Database_connection_issue);
-                    return error;
-                }
-
+                return new ErrorResponse(false, WordList.User_does_not_exist);
             }
 
-            if (count != 0)
+            var getTournamentDetails=ProcedureFunction.getData(loginDetails, model, WordList.primeModelInformation);
+            bool checkTableData = loginCheck.Rows.Count == 1;
+            if (checkTableData)
             {
-                if (count == 1)
+                foreach (DataRow row in getTournamentDetails.Rows)
                 {
-                    Model model = new Model();
-                    GetFunctions get = new BlackYab.GetFunctions();
-
-                    model.AdminName = Fullname;
-                    model.UserName = UsernameHold;
-                    model.canAccess = Access;
-                    model.TournamentID = Tid;
-                    model.RoleID = role;
-                    get.getTournamentDetails(model);
+                    model.UserName = (string)row["username"];
+                    model.AdminName = (string)row["name"];
+                    model.TournamentID= (int)row["tournamentID"];
+                    model.TournamentName= (string)row["tournamentName"];
+                    model.RoleID= (int)row["roleID"];
+                    model.Role= (string)row["roleName"];
+                    model.canAccess= Convert.ToChar(row["canAccessBlackYAB"]);
 
                     Application.Current.Properties["Model"] = model;
-
-                    error = new ErrorResponse(true);
-                    return error;
                 }
-                else
-                {
-                    error = new ErrorResponse(false, WordList.User_information_inconsistancy);
-                    return error;
-                }
+                return new ErrorResponse(true, WordList.Login_successful);
             }
             else
             {
-                error = new ErrorResponse(false, WordList.User_does_not_exist);
-                return error;
+                return new ErrorResponse(false, WordList.Undescribed_error_detected);
             }
         }
 
