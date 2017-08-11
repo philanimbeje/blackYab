@@ -64,13 +64,13 @@ namespace BlackYab
             model.OrgcomTable = sql.CompileTable(query);
         }
 
-        public string RequestInfo(Model model, string request, string Qvariable)
+        public string RequestInfo(Model model, WordList request, string Qvariable)
         {
             string info = "";
             var infoList = new List<string>();
             switch (request)
             {
-                case "getTeamID": infoList = sql.CompileList("select teamID from team where tournamentID='" + model.TournamentID + "' and teamName='"+ Qvariable[0] +"'");
+                case WordList.getTeamID: infoList = sql.CompileList("select teamID from team where tournamentID='" + model.TournamentID + "' and teamName='"+ Qvariable[0] +"'");
                     info=Item(infoList); break;
             }
 

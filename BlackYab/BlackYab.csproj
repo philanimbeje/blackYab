@@ -89,6 +89,7 @@
     <Compile Include="methods\GetFunctions.cs" />
     <Compile Include="methods\StoredProcedureFunctions.cs" />
     <Compile Include="methods\sqlfunctions.cs" />
+    <Compile Include="methods\WordList.cs" />
     <Compile Include="modals\ErrorResponse.cs" />
     <Compile Include="modals\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -36,10 +36,10 @@ namespace BlackYab
             loginDetails.Add(username);
             loginDetails.Add(password);
 
-            DataAuthenticator authenticator = new DataAuthenticator("Login", loginDetails);
+            DataAuthenticator authenticator = new DataAuthenticator(WordList.Login, loginDetails);
             errorResponse = authenticator.error;
 
-            if (errorResponse.AccessBool==true)
+            if (errorResponse.canAccess)
             {
                 HomePage home = new BlackYab.HomePage();
                 this.Close();
@@ -73,10 +73,10 @@ namespace BlackYab
             registrationDetails.Add(start_date);
             registrationDetails.Add(end_date);
 
-            DataAuthenticator authenticator = new DataAuthenticator("Register", registrationDetails);
+            DataAuthenticator authenticator = new DataAuthenticator(WordList.Register, registrationDetails);
             errorResponse = authenticator.error;
 
-            if (errorResponse.AccessBool == true)
+            if (errorResponse.canAccess) 
             {
                
             }

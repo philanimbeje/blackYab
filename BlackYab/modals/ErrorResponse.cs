@@ -8,34 +8,41 @@ namespace BlackYab
 {
     class ErrorResponse
     {
-        public bool AccessBool { get; set; }
+        #region Properties
+        public bool canAccess { get; set; }
         public string ErrorMessage { get; set; }
+        public WordList Error_Message { get; set; }
+        #endregion
 
+        #region constructors
         public ErrorResponse()
         {
-            this.AccessBool = false;
+            this.canAccess = false;
             this.ErrorMessage = "undescribed error detected";
         }
 
-        public ErrorResponse(bool access, string message)
+        public ErrorResponse(bool access, WordList message)
         {
-            this.AccessBool = access;
-            this.ErrorMessage = message;
+            this.canAccess = access;
+
+            var splitMessage = new string[7];
+            splitMessage= Convert.ToString(message).Split('_');
+
+            var compiledMessage = "";
+
+            foreach(string word in splitMessage)
+            {
+                compiledMessage += word + " "; 
+            }
+
+            this.ErrorMessage = compiledMessage;
         }
 
         public ErrorResponse(bool access)
         {
-            if (access==true)
-            {
-                this.AccessBool = access;
-                this.ErrorMessage = "login successful";
-            }
-            if (access==false)
-            {
-                this.AccessBool = access;
-                this.ErrorMessage = "undescribed error detected";
-            }
-            
+            this.canAccess = access;
+            this.ErrorMessage = access ? "login successful" : "undescribed error detected";
         }
+        #endregion
     }
 }

@@ -14,10 +14,10 @@ namespace BlackYab
 
         private List<string> inputString { get; set; }
         private Model info { get; set; }
-        private string cmdAction { get; set; }
+        private WordList cmdAction { get; set; }
         Sqlfunctions sql = new Sqlfunctions(); 
 
-        public void Data(List<string> inputString, Model information, string cmdAction)
+        public void Data(List<string> inputString, Model information, WordList cmdAction)
         {
             this.inputString = inputString;
             this.info = information;
@@ -30,38 +30,38 @@ namespace BlackYab
 
             switch(this.cmdAction)
             {
-                case "addTeam":  addTeamCommands(cmd); break;
-                case "addAdjDebate": addAdjDebateCommands(cmd); break;
-                case "addAdjScore": addAdjScoreCommands(cmd); break;
-                case "addAdjudicator": addAdjudicatorCommands(cmd); break;
-                case "addAdmin": addAdminCommands(cmd); break;
-                case "addDebate": addDebateCommands(cmd); break;
-                case "addInstitution": addInstitutionCommands(cmd); break;
-                case "addMotion": addMotionCommands(cmd); break;
-                case "addNewRole": addNewRoleCommands(cmd); break;
-                case "addNewTournament": addNewTournamentCommands(cmd); break;
-                case "addNewVenue": addNewVenueCommands(cmd); break;
-                case "addRound": addRoundCommands(cmd); break;
-                case "addRoundTab": addRoundTabCommands(cmd); break;
-                case "addSpeaker": addSpeakerCommands(cmd); break;
-                case "addpeakerScore": addpeakerScoreCommands(cmd); break;
-                case "addTeamDebate": addTeamDebateCommands(cmd); break;
-                case "adminAdjudicator": adminADJUDICATORECommands(cmd); break;
-                case "adminIntitution": adminINSTITUTIONSCommands(cmd); break;
-                case "adminOrgcom": adminORGCOMCommands(cmd); break;
-                case "adminSpeaker": adminSPEAKERSCommands(cmd); break;
-                case "adminTeam": adminTEAMCommands(cmd); break;
-                case "adminVenue": adminVENUECommands(cmd); break; 
-                case "currentRound": currentRoundCommands(cmd); break;
-                case "endSession": endSessionCommands(cmd); break;
-                case "newSession": newSessionCommands(cmd); break;
-                case "reportAdjudicators": reportADJUDICATORSCommands(cmd); break;
-                case "reportAdmins": reportADMINCommands(cmd); break;
-                case "reportInstitutions": reportINSTITUTIONSCommands(cmd); break;
-                case "reportRounds": reportROUNDSCommands(cmd); break;
-                case "reportSpeakers": reportSPEAKERSCommands(cmd); break;
-                case "reportTeams": reportTEAMSCommands(cmd); break;
-                case "reportVenues": reportVENUESCommands(cmd); break;
+                case WordList.addTeam:  addTeamCommands(cmd); break;
+                case WordList.addAdjDebate: addAdjDebateCommands(cmd); break;
+                case WordList.addAdjScore: addAdjScoreCommands(cmd); break;
+                case WordList.addAdjudicator: addAdjudicatorCommands(cmd); break;
+                case WordList.addAdmin: addAdminCommands(cmd); break;
+                case WordList.addDebate: addDebateCommands(cmd); break;
+                case WordList.addInstitution: addInstitutionCommands(cmd); break;
+                case WordList.addMotion: addMotionCommands(cmd); break;
+                case WordList.addNewRole: addNewRoleCommands(cmd); break;
+                case WordList.addNewTournament: addNewTournamentCommands(cmd); break;
+                case WordList.addNewVenue: addNewVenueCommands(cmd); break;
+                case WordList.addRound: addRoundCommands(cmd); break;
+                case WordList.addRoundTab: addRoundTabCommands(cmd); break;
+                case WordList.addSpeaker: addSpeakerCommands(cmd); break;
+                case WordList.addpeakerScore: addpeakerScoreCommands(cmd); break;
+                case WordList.addTeamDebate: addTeamDebateCommands(cmd); break;
+                case WordList.adminAdjudicator: adminADJUDICATORECommands(cmd); break;
+                case WordList.adminIntitution: adminINSTITUTIONSCommands(cmd); break;
+                case WordList.adminOrgcom: adminORGCOMCommands(cmd); break;
+                case WordList.adminSpeaker: adminSPEAKERSCommands(cmd); break;
+                case WordList.adminTeam: adminTEAMCommands(cmd); break;
+                case WordList.adminVenue: adminVENUECommands(cmd); break; 
+                case WordList.currentRound: currentRoundCommands(cmd); break;
+                case WordList.endSession: endSessionCommands(cmd); break;
+                case WordList.newSession: newSessionCommands(cmd); break;
+                case WordList.reportAdjudicators: reportADJUDICATORSCommands(cmd); break;
+                case WordList.reportAdmins: reportADMINCommands(cmd); break;
+                case WordList.reportInstitutions: reportINSTITUTIONSCommands(cmd); break;
+                case WordList.reportRounds: reportROUNDSCommands(cmd); break;
+                case WordList.reportSpeakers: reportSPEAKERSCommands(cmd); break;
+                case WordList.reportTeams: reportTEAMSCommands(cmd); break;
+                case WordList.reportVenues : reportVENUESCommands(cmd); break;
             }
             return cmd;
         }
@@ -70,7 +70,7 @@ namespace BlackYab
         {
             using (SqlConnection reg = sql.getConnection())
             {
-                using (SqlCommand cmd = new SqlCommand(this.cmdAction, reg))
+                using (SqlCommand cmd = new SqlCommand(Convert.ToString(cmdAction), reg))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 

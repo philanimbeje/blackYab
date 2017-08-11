@@ -12,7 +12,7 @@ namespace BlackYab
     {
         Sqlfunctions sql = new Sqlfunctions();
         //ErrorResponse error = new ErrorResponse();
-
+        #region Properties
         private string username { get; set; }
         private string password { get; set; }
 
@@ -24,21 +24,21 @@ namespace BlackYab
         private string end_date { get; set; }
 
         public ErrorResponse error { get; set; }
+        #endregion
 
-
-
-        public DataAuthenticator(string AutheticateRequest, List<string> registerDetails)
+        #region Constructors
+        public DataAuthenticator(WordList AutheticateRequest, List<string> registerDetails)
         {
             
 
             switch(AutheticateRequest)
             {
-                case "Login":
+                case WordList.Login:
                     username = registerDetails[0];
                     password = registerDetails[1];
                     error = LoginAuthenticator();
                     break;
-                case "Register":
+                case WordList.Register:
                     username = registerDetails[0];
                     name = registerDetails[1];
                     password = registerDetails[2];
@@ -58,7 +58,9 @@ namespace BlackYab
         {
             error = new ErrorResponse();
         }
+        #endregion
 
+        #region Methods
         //not sure if i need this function, its behaving like a middle-man method---this is smelly
         private ErrorResponse LoginAuthenticator()
         {
@@ -116,7 +118,7 @@ namespace BlackYab
                 }
                 else
                 {
-                    error = new ErrorResponse(false, "database connection issue");
+                    error = new ErrorResponse(false, WordList.Database_connection_issue);
                     return error;
                 }
 
@@ -143,13 +145,13 @@ namespace BlackYab
                 }
                 else
                 {
-                    error = new ErrorResponse(false, "User information inconsistancy");
+                    error = new ErrorResponse(false, WordList.User_information_inconsistancy);
                     return error;
                 }
             }
             else
             {
-                error = new ErrorResponse(false, "User does not exist");
+                error = new ErrorResponse(false, WordList.User_does_not_exist);
                 return error;
             }
         }
@@ -161,5 +163,6 @@ namespace BlackYab
             //existance check 
             return error;
         }
+        #endregion
     }
 }

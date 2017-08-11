@@ -37,30 +37,30 @@ namespace BlackYab
             string team = comboBoxAddTeams.Text;
             string category= Convert.ToString(radioButtonAddEFL.IsChecked);
             string canbreak = Convert.ToString(checkBoxAddCanBreak.IsChecked);
-            string isSpeaker = Convert.ToString(radioButtonAddSpeaker.IsChecked);
+            bool isSpeaker = Convert.ToBoolean(radioButtonAddSpeaker.IsChecked);
            
             //validation function
 
-            if (isSpeaker=="true")
+            if (isSpeaker)
             {
                 details.Add(name);
                 details.Add(institution);
                 details.Add(category);
-                details.Add(get.RequestInfo(model, "getTeamID", team));
+                details.Add(get.RequestInfo(model, WordList.getTeamID, team));
                 details.Add(Convert.ToString(model.TournamentID));
                 details.Add(Convert.ToString(DateTime.Now));
 
-                input.Data(details, model, "addSpeaker");
+                input.Data(details, model, WordList.addSpeaker);
 
             }
-            if(isSpeaker=="false")
+            else
             {
                 details.Add(name);
                 details.Add(institution);
                 details.Add(Convert.ToString(model.TournamentID));
                 details.Add(canbreak);
 
-                input.Data(details, model, "addAdjudicator");
+                input.Data(details, model, WordList.addAdjudicator);
             }
         }
 
