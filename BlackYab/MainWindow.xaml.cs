@@ -16,63 +16,47 @@ namespace BlackYab
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUserNameLogin.Text;
-            string password = passwordBoxLogin.Password;
-
             var loginDetails = new List<string>();
 
-            loginDetails.Add(username);
-            loginDetails.Add(password);
+            loginDetails.Add(txtUserNameLogin.Text);
+            loginDetails.Add(passwordBoxLogin.Password);
  
             Application.Current.Properties["LoginDetails"] = loginDetails;
 
             DataAuthenticator authenticator = new DataAuthenticator(WordList.Login, loginDetails);
-            errorResponse = authenticator.error;
 
-            if (errorResponse.canAccess)
+            if (authenticator.Error.canAccess)
             {
                 HomePage home = new BlackYab.HomePage();
                 this.Close();
-                home.Show();
+                home.Show(); 
             }
             else
             {
-                MessageBox.Show(errorResponse.ErrorMessage+"\nPlease try again");
+                MessageBox.Show(authenticator.Error.ErrorMessage+"\nPlease try again");
             }
         }
 
         private void buttonRegister_Click(object sender, RoutedEventArgs e)
         {
-            string username= txtRegUsername.Text;
-            string name= txtRegName.Text;
-            string password = passwordBoxReg.Password;
-            string t_name = txtRegTName.Text;
-            string rounds = txtRegRounds.Text;
-            string break_round = txtRegBreakRound.Text;
-            string start_date = RegStartDate.Text;
-            string end_date = RegEndDate.Text;
-
             var registrationDetails = new List<string>();
-
-            registrationDetails.Add(username);
-            registrationDetails.Add(name);
-            registrationDetails.Add(password);
-            registrationDetails.Add(t_name);
-            registrationDetails.Add(rounds);
-            registrationDetails.Add(break_round);
-            registrationDetails.Add(start_date);
-            registrationDetails.Add(end_date);
+            registrationDetails.Add(txtRegUsername.Text);
+            registrationDetails.Add(txtRegName.Text);
+            registrationDetails.Add(passwordBoxReg.Password);
+            registrationDetails.Add(txtRegTName.Text);
+            registrationDetails.Add(txtRegRounds.Text);
+            registrationDetails.Add(txtRegBreakRound.Text);
+            registrationDetails.Add(RegStartDate.Text);
+            registrationDetails.Add(RegEndDate.Text);
 
             DataAuthenticator authenticator = new DataAuthenticator(WordList.Register, registrationDetails);
-            errorResponse = authenticator.error;
-
-            if (errorResponse.canAccess) 
+            
+            if (authenticator.Error.canAccess) 
             {
-               
             }
             else
             {
-                MessageBox.Show(errorResponse.ErrorMessage + "\nPlease try again");
+                MessageBox.Show(authenticator.Error.ErrorMessage + "\nPlease try again");
             }
         }
     }

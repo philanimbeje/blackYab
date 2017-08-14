@@ -1,0 +1,24 @@
+﻿<Window x:Class="BlackYab.AddVenues"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlackYab"
+        Icon="themify_e644(0).ico"
+        mc:Ignorable="d"
+        Title="Add Venue" Height="228.684" Width="309" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <SolidColorBrush Color="#FF464545"/>
+    </Window.Background>
+    <Window.Resources>
+        <Color x:Key="Color1">#FF464545</Color>
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="218,166,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
+        <TextBox x:Name="txtAddVenueName" HorizontalAlignment="Left" Height="23" Margin="12,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="#FF080808"/>
+        <Label x:Name="label1" Content="Venue Name" HorizontalAlignment="Left" Margin="12,74,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="buttonAddVenue" Content="Add" HorizontalAlignment="Left" Margin="138,166,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF060606" Click="buttonAddVenue_Click" />
+        <Label x:Name="label2" Content="Add Venue" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+
+    </Grid>
+</Window>

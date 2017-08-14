@@ -26,7 +26,7 @@ namespace BlackYab
         private string end_date { get; set; }
         private List<string> regDetails { get; set; } 
 
-        public ErrorResponse error { get; set; }
+        public ErrorResponse Error { get; set; }
         #endregion
 
         #region Constructors
@@ -40,7 +40,7 @@ namespace BlackYab
                     username = inputDetails[0];
                     password = inputDetails[1];
                     loginDetails = inputDetails;
-                    error = LoginAuthenticator();
+                    Error = LoginAuthenticator();
                     break;
                 case WordList.Register:
                     username = inputDetails[0];
@@ -52,16 +52,16 @@ namespace BlackYab
                     start_date = inputDetails[6];
                     end_date = inputDetails[7];
                     regDetails = inputDetails;
-                    error = RegisterAuthenticator();
+                    Error = RegisterAuthenticator();
                     break;
-                default: error= new ErrorResponse();
+                default: Error= new ErrorResponse();
                     break;
             }
         }
 
         private DataAuthenticator()
         {
-            error = new ErrorResponse();
+            Error = new ErrorResponse();
         }
         #endregion
 
@@ -117,7 +117,7 @@ namespace BlackYab
             //empty fields
             //data validation
             //existance check 
-            return error;
+            return Error;
         }
         #endregion
     }

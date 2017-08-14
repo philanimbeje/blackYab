@@ -10,6 +10,7 @@ namespace BlackYab
         private List<string> inputString { get; set; }
         private Model info { get; set; }
         private WordList cmdAction { get; set; }
+
         public void InputData(List<string> inputString, Model information, WordList cmdAction)
         {
             this.inputString = inputString;
@@ -34,21 +35,16 @@ namespace BlackYab
         {
             var sql = new Sqlfunctions();
             DataTable table = new DataTable();
-            try
-            {
-                var con = sql.getConnection();
-                var cmd = new SqlCommand(Convert.ToString(cmdAction), con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                var adapter = new SqlDataAdapter(StoredProcedureAction(cmd));
-                //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                adapter.Fill(table);
-            }
-            catch (SqlException ex)
-            {
-            }
+
+            var con = sql.getConnection();
+            var cmd = new SqlCommand(Convert.ToString(cmdAction), con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            var adapter = new SqlDataAdapter(StoredProcedureAction(cmd));
+            adapter.Fill(table);
+
             return table;
         }//returns datatable from sent query 
-        public SqlCommand StoredProcedureAction(SqlCommand cmd)
+        private SqlCommand StoredProcedureAction(SqlCommand cmd)
         {
             switch(this.cmdAction)
             {

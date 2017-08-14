@@ -58,7 +58,7 @@ namespace BlackYab
                 details.Add(name);
                 details.Add(institution);
                 details.Add(Convert.ToString(model.TournamentID));
-                details.Add(canbreak);
+                details.Add(Convert.ToString(canbreak[0]));
 
                 input.InputData(details, model, WordList.addAdjudicator);
             }

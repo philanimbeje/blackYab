@@ -57,7 +57,7 @@
                             <SolidColorBrush Color="#FF588D58"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="buttonEditTeam" Content="Edit Team" HorizontalAlignment="Left" Margin="1085,139,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                    <Button x:Name="buttonEditTeam" Content="Edit Team" HorizontalAlignment="Left" Margin="1085,139,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Click="buttonEditTeam_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{DynamicResource Color10}"/>
                         </Button.Background>
@@ -68,17 +68,17 @@
                     <DataGrid x:Name="dataGridVOrgcom" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="764,261,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
                     <DataGrid x:Name="dataGridVSpeakers" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="207,33,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
                     <DataGrid x:Name="dataGridVRooms" CanUserAddRows="False" ItemsSource="{Binding}" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="207,261,0,0" VerticalAlignment="Top" Height="198" Width="271"/>
-                    <Button x:Name="buttonEditVenues" Content="Edit Room" HorizontalAlignment="Left" Margin="1085,193,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                    <Button x:Name="buttonEditVenues" Content="Edit Room" HorizontalAlignment="Left" Margin="1085,193,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Click="buttonEditVenues_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{DynamicResource Color10}"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="buttonEditInstitution" Content="Edit Institution" HorizontalAlignment="Left" Margin="1085,166,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                    <Button x:Name="buttonEditInstitution" Content="Edit Institution" HorizontalAlignment="Left" Margin="1085,166,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Click="buttonEditInstitution_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{DynamicResource Color10}"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="buttonEditOrgCom" Content="Edit OrgCom" HorizontalAlignment="Left" Margin="1085,220,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White">
+                    <Button x:Name="buttonEditOrgCom" Content="Edit OrgCom" HorizontalAlignment="Left" Margin="1085,220,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Click="buttonEditOrgCom_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{DynamicResource Color10}"/>
                         </Button.Background>

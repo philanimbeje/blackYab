@@ -62,8 +62,31 @@ namespace BlackYab
 
         private void buttonEditDebator_Click(object sender, RoutedEventArgs e)
         {
-            AddDebator debator = new AddDebator();
+            var debator = new AddDebator();
             debator.ShowDialog();
+        }
+
+        private void buttonEditTeam_Click(object sender, RoutedEventArgs e)
+        {
+            var team = new BlackYab.AddTeam();
+            team.ShowDialog();
+        }
+
+        private void buttonEditInstitution_Click(object sender, RoutedEventArgs e)
+        {
+            var institution = new AddInstitution();
+            institution.ShowDialog();
+        }
+
+        private void buttonEditVenues_Click(object sender, RoutedEventArgs e)
+        {
+            var venues = new AddVenues();
+            venues.ShowDialog();
+        }
+
+        private void buttonEditOrgCom_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,25 @@
+﻿<Window x:Class="BlackYab.AddInstitution"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlackYab"
+        Icon="themify_e644(0).ico"
+        mc:Ignorable="d"
+        Title="Add Institution" Height="295" Width="309" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <SolidColorBrush Color="#FF464545"/>
+    </Window.Background>
+    <Window.Resources>
+        <Color x:Key="Color1">#FF464545</Color>
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="209,228,0,0" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click"/>
+        <TextBox x:Name="txtAddInstitutionName" HorizontalAlignment="Left" Height="23" Margin="12,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="#FF080808"/>
+        <Label x:Name="label1" Content="Institution Name" HorizontalAlignment="Left" Margin="12,74,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="buttonAddInstitution" Content="Add" HorizontalAlignment="Left" Margin="129,228,0,0" VerticalAlignment="Top" Width="75" Foreground="#FF060606" Click="buttonAddInstitution_Click" />
+        <Label x:Name="label2" Content="Add Institution" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <CheckBox x:Name="checkBoxAddLocalInstitution" Content="Local Institution" HorizontalAlignment="Left" Margin="183,107,0,0" VerticalAlignment="Top" IsChecked="True"  Foreground="White"/>
+
+    </Grid>
+</Window>
