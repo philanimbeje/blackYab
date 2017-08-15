@@ -38,6 +38,7 @@ namespace BlackYab
             details.Add(txtAddInstitutionName.Text);
             details.Add(Convert.ToString(checkBoxAddLocalInstitution.IsChecked.ToString()[0]));
             input.InputData(details, model, WordList.addInstitution);
+            this.Close();
         }
     }
 }

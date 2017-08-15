@@ -62,6 +62,7 @@ namespace BlackYab
 
                 input.InputData(details, model, WordList.addAdjudicator);
             }
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

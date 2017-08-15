@@ -12,16 +12,17 @@ namespace BlackYab
 {
     class GetFunctions
     {
-        List<string> inputString = new List<string>();
+        //List<string> inputString = new List<string>();
         Sqlfunctions sql = new Sqlfunctions();
         StoredProcedureFunctions ProcedureFunctions = new StoredProcedureFunctions();
 
         public DataTable getLogin(Model model)
         {
+            var inputString = new List<string>();
             return ProcedureFunctions.getData(inputString, model, WordList.LoginTable);
         }
 
-        public void getTournamentDetails(Model model)
+        public void TournamentDetails(Model model)
         {
             var tournament = sql.CompileList("select tournamentname from tournament where tournamentID='" + model.TournamentID + "'");
             model.TournamentName = Item(tournament);
@@ -51,25 +52,26 @@ namespace BlackYab
             model.TotalSpeakers = TotalSpeakers.Count;
 
             var query = "";
-            
 
+            var inputString = new List<string>();
+            inputString.Add(""+model.TournamentID+"");
             //query = "select teamName, count(s.teamID) as teamMembers, canBreak   from speaker s right join team t on t.teamid = s.teamID where t.tournamentID = '" + model.TournamentID + "' group by teamName, t.teamID, canBreak";
-            model.TeamTable = ProcedureFunctions.getData(inputString, model, WordList.TeamTable);
+            model.TeamTable = ProcedureFunctions.getData(inputString, model, WordList.adminTeam);
             
             //query = "select speakerName, institutionName, teamName from Speaker s join Institution i on s.institutionID = i.institutionID left join team t on s.teamID = t.teamID where s.tournamentID='" + model.TournamentID + "'";
-            model.SpeakerTable = ProcedureFunctions.getData(inputString, model, WordList.SpeakerTable);
+            model.SpeakerTable = ProcedureFunctions.getData(inputString, model, WordList.adminSpeakers);
 
            //query = "select adjName, institutionName, canbreak from adjudicator a join institution i on i.institutionID = a.institutionID where a.tournamentID='" + model.TournamentID + "'";
-            model.AdjTable = ProcedureFunctions.getData(inputString, model, WordList.AdjudicatorjTable);
+            model.AdjTable = ProcedureFunctions.getData(inputString, model, WordList.adminAdjudicators);
 
             //query = "select  institutionName, count(distinct speakerName)+count(distinct adjName) as NumberOfDebators from Institution i left join Adjudicator a on a.institutionID = i.institutionID left join Speaker s on s.institutionID = i.institutionID where s.tournamentID='" + model.TournamentID + "' or a.tournamentID='" + model.TournamentID + "' group by  institutionName";
-            model.InstitutionTable = ProcedureFunctions.getData(inputString, model, WordList.InstitutionTable);
+            model.InstitutionTable = ProcedureFunctions.getData(inputString, model, WordList.adminInstitutions);
 
             //query = "select venueName as Venue from venue v where v.tournamentID='" + model.TournamentID + "'";
-            model.VenueTable = ProcedureFunctions.getData(inputString, model, WordList.VenueTable);
+            model.VenueTable = ProcedureFunctions.getData(inputString, model, WordList.adminVenue);
 
             //query = "select Name, rolename as Role from admin a join role r on a.roleID = r.roleID where a.tournamentID='" + model.TournamentID + "'";
-            model.OrgcomTable = ProcedureFunctions.getData(inputString, model, WordList.OrgcomTable);
+            model.OrgcomTable = ProcedureFunctions.getData(inputString, model, WordList.adminOrgcom);
         }
 
         public string RequestInfo(Model model, WordList request, string Qvariable)

@@ -22,6 +22,7 @@ namespace BlackYab
         Model model = (Model)Application.Current.Properties["Model"];
 
         StoredProcedureFunctions input = new StoredProcedureFunctions();
+        HomePage home = new HomePage();
         public AddTeam()
         {
             InitializeComponent();
@@ -41,6 +42,9 @@ namespace BlackYab
             details.Add(Convert.ToString(DateTime.Now));
 
             input.InputData(details, model, WordList.addTeam);
+            this.Close();
+            //home.Update();
+            
         }
     }
 }

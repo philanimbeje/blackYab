@@ -39,6 +39,7 @@ namespace BlackYab
             details.Add(Convert.ToString(model.TournamentID));
             details.Add(Convert.ToString(DateTime.Now));
             input.InputData(details, model, WordList.addNewVenue);
+            this.Close();
         }
     }
 }

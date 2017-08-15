@@ -83,7 +83,7 @@
                             <SolidColorBrush Color="{DynamicResource Color10}"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="buttonEditViewUpdate" Content="Update Table Views" HorizontalAlignment="Left" Margin="1085,375,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Height="46" >
+                    <Button x:Name="buttonEditViewUpdate" Content="Update Table Views" HorizontalAlignment="Left" Margin="1085,375,0,0" VerticalAlignment="Top" Width="112"  BorderBrush="White" Foreground="White" Height="46" Click="buttonEditViewUpdate_Click" >
                         <Button.Background>
                             <SolidColorBrush Color="{DynamicResource Color10}"/>
                         </Button.Background>

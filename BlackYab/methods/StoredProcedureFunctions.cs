@@ -64,10 +64,10 @@ namespace BlackYab
                 case WordList.addSpeaker: addSpeakerCommands(cmd); break;
                 case WordList.addpeakerScore: addpeakerScoreCommands(cmd); break;
                 case WordList.addTeamDebate: addTeamDebateCommands(cmd); break;
-                case WordList.adminAdjudicator: adminADJUDICATORECommands(cmd); break;
-                case WordList.adminIntitution: adminINSTITUTIONSCommands(cmd); break;
+                case WordList.adminAdjudicators: adminADJUDICATORECommands(cmd); break;
+                case WordList.adminInstitutions: adminINSTITUTIONSCommands(cmd); break;
                 case WordList.adminOrgcom: adminORGCOMCommands(cmd); break;
-                case WordList.adminSpeaker: adminSPEAKERSCommands(cmd); break;
+                case WordList.adminSpeakers: adminSPEAKERSCommands(cmd); break;
                 case WordList.adminTeam: adminTEAMCommands(cmd); break;
                 case WordList.adminVenue: adminVENUECommands(cmd); break; 
                 case WordList.currentRound: currentRoundCommands(cmd); break;

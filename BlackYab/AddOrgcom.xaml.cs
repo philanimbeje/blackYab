@@ -39,6 +39,7 @@ namespace BlackYab
             details.Add(Convert.ToString(Convert.ToString(checkBoxOrgCom.IsChecked)[0]));
 
             input.InputData(details, model, WordList.addAdmin);
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

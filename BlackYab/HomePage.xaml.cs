@@ -19,13 +19,20 @@ namespace BlackYab
     /// </summary>
     public partial class HomePage : Window
     {
-
         Model model = (Model)Application.Current.Properties["Model"];
 
+        GetFunctions get = new GetFunctions();
         AdminDisplay display = new AdminDisplay();
+
         public HomePage()
         {
             InitializeComponent();
+            Update();
+        }
+
+        public void Update()
+        {
+            get.TournamentDetails(model);
             TournamentSummary();
             AdminViews();
         }
@@ -35,29 +42,6 @@ namespace BlackYab
             MainWindow main = new BlackYab.MainWindow();
             this.Close();
             main.Show();
-        }
-
-        private void AdminViews()
-        {
-            dataGridVTeam.DataContext = model.TeamTable.DefaultView;
-            dataGridVAdjudicators.DataContext = model.AdjTable.DefaultView;
-            dataGridVInstitution.DataContext = model.InstitutionTable.DefaultView;
-            dataGridVOrgcom.DataContext = model.OrgcomTable.DefaultView;
-            dataGridVRooms.DataContext = model.VenueTable.DefaultView;
-            dataGridVSpeakers.DataContext = model.SpeakerTable.DefaultView;
-        }
-
-        private void TournamentSummary()
-        {
-            labelTName.Content = model.TournamentName;
-            labelRound.Content = model.CurrentRound;
-            labelLoggedIn.Content = model.AdminName;
-            labelCompetitors.Content = model.TotalAdjudicators + model.TotalSpeakers;
-            labelSpeakers.Content = model.TotalSpeakers;
-            labelSpeakersInTeams.Content = -1;
-            labelTeams.Content = model.TotalTeams;
-            labelIncompleteTeams.Content = -1;
-            labelAdjudicators.Content = model.TotalAdjudicators;
         }
 
         private void buttonEditDebator_Click(object sender, RoutedEventArgs e)
@@ -86,7 +70,36 @@ namespace BlackYab
 
         private void buttonEditOrgCom_Click(object sender, RoutedEventArgs e)
         {
+            var orgcom = new AddOrgcom();
+            orgcom.ShowDialog();
+        }
 
+        private void buttonEditViewUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        private void AdminViews()
+        {
+            dataGridVTeam.DataContext = model.TeamTable.DefaultView;
+            dataGridVAdjudicators.DataContext = model.AdjTable.DefaultView;
+            dataGridVInstitution.DataContext = model.InstitutionTable.DefaultView;
+            dataGridVOrgcom.DataContext = model.OrgcomTable.DefaultView;
+            dataGridVRooms.DataContext = model.VenueTable.DefaultView;
+            dataGridVSpeakers.DataContext = model.SpeakerTable.DefaultView;
+        }
+
+        private void TournamentSummary()
+        {
+            labelTName.Content = model.TournamentName;
+            labelRound.Content = model.CurrentRound;
+            labelLoggedIn.Content = model.AdminName;
+            labelCompetitors.Content = model.TotalAdjudicators + model.TotalSpeakers;
+            labelSpeakers.Content = model.TotalSpeakers;
+            labelSpeakersInTeams.Content = -1;
+            labelTeams.Content = model.TotalTeams;
+            labelIncompleteTeams.Content = -1;
+            labelAdjudicators.Content = model.TotalAdjudicators;
         }
     }
 }
