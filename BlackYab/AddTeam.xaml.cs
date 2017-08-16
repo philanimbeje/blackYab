@@ -43,7 +43,7 @@ namespace BlackYab
 
             input.InputData(details, model, WordList.addTeam);
             this.Close();
-            //home.Update();
+            //home.hom
             
         }
     }

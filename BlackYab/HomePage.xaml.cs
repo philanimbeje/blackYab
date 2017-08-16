@@ -35,6 +35,7 @@ namespace BlackYab
             get.TournamentDetails(model);
             TournamentSummary();
             AdminViews();
+            ReportViews();
         }
 
         private void buttonLogOff_Click(object sender, RoutedEventArgs e)
@@ -100,6 +101,63 @@ namespace BlackYab
             labelTeams.Content = model.TotalTeams;
             labelIncompleteTeams.Content = -1;
             labelAdjudicators.Content = model.TotalAdjudicators;
+        }
+
+        private void ReportViews()
+        {
+            GeneralReport.DataContext = model.GeneralReport;
+            SpeakersReport.DataContext = model.SpeakerReport;
+            AdjReport.DataContext = model.AdjReport;
+            TeamsReport.DataContext = model.TeamReport;
+            RoundReport.DataContext = model.RoundReport;
+            VenueReport.DataContext = model.VenueReport;
+            InstitutionReport.DataContext = model.InstitutionReport;
+            //AdminReport.DataContext = model.AdminReport;
+        }
+
+        private void btnPDFTeam_Click(object sender, RoutedEventArgs e)
+        {
+            var report = new ExportReport(model.TeamReport, getPath());
+            ExportComplete();
+        }
+
+        private void btnPDFGeneral_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void btnAdjReport_Click(object sender, RoutedEventArgs e)
+        {
+            var report = new ExportReport(model.AdjReport, getPath());
+            ExportComplete();
+        }
+
+        private void btnRounds_Click(object sender, RoutedEventArgs e)
+        {
+            var report = new ExportReport(model.RoundReport, getPath());
+            ExportComplete();
+        }
+
+        private void btnVenues_Click(object sender, RoutedEventArgs e)
+        {
+            var report = new ExportReport(model.VenueReport, getPath());
+            ExportComplete();
+
+        }
+
+        private void btnInstitution_Click(object sender, RoutedEventArgs e)
+        {
+            var report = new ExportReport(model.InstitutionReport, getPath());
+            ExportComplete();
+        }
+
+        private string getPath()
+        {
+            return "exportFile";
+        }
+
+        private void ExportComplete()
+        {
+            MessageBox.Show("Export Complete");
         }
     }
 }

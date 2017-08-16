@@ -51,27 +51,24 @@ namespace BlackYab
             var TotalSpeakers = sql.CompileList("select speakername from speaker  where tournamentid='" + model.TournamentID + "'");
             model.TotalSpeakers = TotalSpeakers.Count;
 
-            var query = "";
-
             var inputString = new List<string>();
             inputString.Add(""+model.TournamentID+"");
-            //query = "select teamName, count(s.teamID) as teamMembers, canBreak   from speaker s right join team t on t.teamid = s.teamID where t.tournamentID = '" + model.TournamentID + "' group by teamName, t.teamID, canBreak";
+
             model.TeamTable = ProcedureFunctions.getData(inputString, model, WordList.adminTeam);
-            
-            //query = "select speakerName, institutionName, teamName from Speaker s join Institution i on s.institutionID = i.institutionID left join team t on s.teamID = t.teamID where s.tournamentID='" + model.TournamentID + "'";
             model.SpeakerTable = ProcedureFunctions.getData(inputString, model, WordList.adminSpeakers);
-
-           //query = "select adjName, institutionName, canbreak from adjudicator a join institution i on i.institutionID = a.institutionID where a.tournamentID='" + model.TournamentID + "'";
             model.AdjTable = ProcedureFunctions.getData(inputString, model, WordList.adminAdjudicators);
-
-            //query = "select  institutionName, count(distinct speakerName)+count(distinct adjName) as NumberOfDebators from Institution i left join Adjudicator a on a.institutionID = i.institutionID left join Speaker s on s.institutionID = i.institutionID where s.tournamentID='" + model.TournamentID + "' or a.tournamentID='" + model.TournamentID + "' group by  institutionName";
             model.InstitutionTable = ProcedureFunctions.getData(inputString, model, WordList.adminInstitutions);
-
-            //query = "select venueName as Venue from venue v where v.tournamentID='" + model.TournamentID + "'";
             model.VenueTable = ProcedureFunctions.getData(inputString, model, WordList.adminVenue);
-
-            //query = "select Name, rolename as Role from admin a join role r on a.roleID = r.roleID where a.tournamentID='" + model.TournamentID + "'";
             model.OrgcomTable = ProcedureFunctions.getData(inputString, model, WordList.adminOrgcom);
+
+            model.AdjReport= ProcedureFunctions.getData(inputString, model, WordList.reportAdjudicators);
+            model.SpeakerReport = ProcedureFunctions.getData(inputString, model, WordList.reportSpeakers);
+            model.TeamReport = ProcedureFunctions.getData(inputString, model, WordList.reportTeams);
+            model.VenueReport = ProcedureFunctions.getData(inputString, model, WordList.reportVenues);
+            model.InstitutionReport = ProcedureFunctions.getData(inputString, model, WordList.reportInstitutions);
+            model.RoundReport = ProcedureFunctions.getData(inputString, model, WordList.reportRounds);
+            //model.GeneralReport = ProcedureFunctions.getData(inputString, model, WordList.reportGeneral);
+            model.AdminReport = ProcedureFunctions.getData(inputString, model, WordList.reportAdmins);
         }
 
         public string RequestInfo(Model model, WordList request, string Qvariable)
@@ -83,12 +80,8 @@ namespace BlackYab
                 case WordList.getTeamID: infoList = sql.CompileList("select teamID from team where tournamentID='" + model.TournamentID + "' and teamName='"+ Qvariable[0] +"'");
                     info=Item(infoList); break;
             }
-
-
             return info;
         }
-        
-        
         
         private string Item(List<string> list)
         {

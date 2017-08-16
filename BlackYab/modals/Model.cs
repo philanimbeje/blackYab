@@ -42,7 +42,7 @@ namespace BlackYab
         public DataTable SpeakerReport = new DataTable();
         public DataTable TeamReport = new DataTable();
         public DataTable AdjReport = new DataTable();
-        public DataTable RoundReport = new DataTable();
+        public DataTable RoundReport = new DataTable(); 
         public DataTable VenueReport = new DataTable();
         public DataTable InstitutionReport = new DataTable();
         public DataTable AdminReport = new DataTable();

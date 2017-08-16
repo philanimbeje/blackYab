@@ -107,14 +107,14 @@
                     <TabControl x:Name="tabControl1" HorizontalAlignment="Left" Height="417" Margin="10,29,0,0" VerticalAlignment="Top" Width="1216">
                         <TabItem Header="General">
                             <Grid Background="#FFE5E5E5">
-                                <Button x:Name="btnPDFGeneral" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
-                                <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309"/>
+                                <Button x:Name="btnPDFGeneral" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86" Click="btnPDFGeneral_Click"/>
+                                <DataGrid x:Name="GeneralReport" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309"/>
 
                             </Grid>
                         </TabItem>
                         <TabItem Header="Speakers">
                             <Grid Background="#FFE5E5E5">
-                                <DataGrid x:Name="DataGridSpeakers"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" >
+                                <DataGrid x:Name="SpeakersReport"  ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" >
 
                                 </DataGrid>
                                 <Expander x:Name="expander1" Header="Export Report" HorizontalAlignment="Left" Margin="1094,10,0,0" VerticalAlignment="Top" IsExpanded="False">
@@ -132,32 +132,32 @@
                         </TabItem>
                         <TabItem Header="Teams">
                             <Grid Background="#FFE5E5E5">
-                                <Button x:Name="button_Copy" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
-                                <DataGrid x:Name="dataGridTeams"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                                <Button x:Name="btnPDFTeam" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86" Click="btnPDFTeam_Click"/>
+                                <DataGrid x:Name="TeamsReport" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Adjudicators">
                             <Grid Background="#FFE5E5E5">
-                                <Button x:Name="button" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
-                                <DataGrid x:Name="dataGridAdj"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                                <Button x:Name="btnAdjReport" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86" Click="btnAdjReport_Click"/>
+                                <DataGrid x:Name="AdjReport" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Round">
                             <Grid Background="#FFE5E5E5">
-                                <Button x:Name="button_Copy3" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
-                                <DataGrid x:Name="dataGridRound"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                                <Button x:Name="btnRounds" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86" Click="btnRounds_Click"/>
+                                <DataGrid x:Name="RoundReport" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Room">
                             <Grid Background="#FFE5E5E5">
-                                <Button x:Name="button_Copy4" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
-                                <DataGrid x:Name="dataGridRoom"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
+                                <Button x:Name="btnVenues" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86" Click="btnVenues_Click"/>
+                                <DataGrid x:Name="VenueReport" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Institutions">
                             <Grid Background="#FFE5E5E5">
-                                <Button x:Name="buttonInstitutionPDF" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86"/>
-                                <DataGrid x:Name="dataGridInstitution"  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309"/>
+                                <Button x:Name="btnInstitution" Content="Download PDF" HorizontalAlignment="Left" Margin="1110,355,0,0" VerticalAlignment="Top" Width="86" Click="btnInstitution_Click"/>
+                                <DataGrid x:Name="InstitutionReport" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserSortColumns="True" IsReadOnly="True"  HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="1186" Height="309"/>
 
                             </Grid>
                         </TabItem>

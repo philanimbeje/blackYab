@@ -57,7 +57,7 @@ namespace BlackYab
         OrgcomTable,
         LoginTable, 
         primeModelInformation,
-
+        reportGeneral,
     };
     
 }
