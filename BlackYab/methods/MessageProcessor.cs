@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackYab
 {
-    class MessageProcessor
+   public class MessageProcessor
     {
         public string ProcessorMessage(WordList message)
         {

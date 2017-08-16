@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackYab
 {
-    class ErrorResponse
+    public class ErrorResponse
     {
         MessageProcessor Message = new MessageProcessor();
         #region Properties
