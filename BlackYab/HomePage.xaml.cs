@@ -117,7 +117,7 @@ namespace BlackYab
 
         private void btnPDFTeam_Click(object sender, RoutedEventArgs e)
         {
-            var report = new ExportReport(model.TeamReport, getPath());
+            var report = new ExportReport(model.TeamReport, getDate("Team"));
             ExportComplete();
         }
 
@@ -127,32 +127,34 @@ namespace BlackYab
 
         private void btnAdjReport_Click(object sender, RoutedEventArgs e)
         {
-            var report = new ExportReport(model.AdjReport, getPath());
+            
+            var report = new ExportReport(model.AdjReport, getDate("Adjudicators"));
             ExportComplete();
         }
 
         private void btnRounds_Click(object sender, RoutedEventArgs e)
         {
-            var report = new ExportReport(model.RoundReport, getPath());
+            var report = new ExportReport(model.RoundReport, getDate("Rounds"));
             ExportComplete();
         }
 
         private void btnVenues_Click(object sender, RoutedEventArgs e)
         {
-            var report = new ExportReport(model.VenueReport, getPath());
+            var report = new ExportReport(model.VenueReport, getDate("Venues"));
             ExportComplete();
 
         }
 
         private void btnInstitution_Click(object sender, RoutedEventArgs e)
         {
-            var report = new ExportReport(model.InstitutionReport, getPath());
+            var report = new ExportReport(model.InstitutionReport, getDate("Institution"));
             ExportComplete();
-        }
+        } 
 
-        private string getPath()
+        private string getDate(string reportType)
         {
-            return "exportFile";
+            var message = new MessageProcessor();
+            return message.ProcessorMessage(reportType+"  "+Convert.ToString(DateTime.Now));
         }
 
         private void ExportComplete()

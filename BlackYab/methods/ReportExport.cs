@@ -52,7 +52,7 @@ namespace BlackYab
                 }
                 sb.AppendLine();
             }
-            File.WriteAllText(@"C:\desktop\"+path+".csv", Convert.ToString(sb));
+            File.WriteAllText(@"C:\desktop\BlackYAB - "+path+".csv", Convert.ToString(sb));
         }
     }
 }
