@@ -32,22 +32,5 @@ namespace BY_Test
             Assert.AreEqual(expected, actual);
         }
     }
-
-    [TestClass()]
-    public class TestErrorMessages
-    {
-        [TestMethod()]
-        public void ShouldReturnFalseAndMessage()
-        {
-            //arrange
-            bool expectedbool = false;
-            string expectedstring= "Undescribed error detected ";
-            //act
-            var error = new ErrorResponse();
-            
-            //assert
-            Assert.AreEqual(expectedbool, error.canAccess);
-            Assert.AreEqual(expectedstring, error.ErrorMessage);
-        }
-    }
+    
 }
