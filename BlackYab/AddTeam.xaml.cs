@@ -42,6 +42,7 @@ namespace BlackYab
             details.Add(Convert.ToString(DateTime.Now));
 
             input.InputData(details, model, WordList.addTeam);
+            MessageBox.Show("Addition Complete");
             this.Close();
             //home.hom
             

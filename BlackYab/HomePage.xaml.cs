@@ -79,7 +79,6 @@ namespace BlackYab
         {
             Update();
         }
-
         private void AdminViews()
         {
             dataGridVTeam.DataContext = model.TeamTable.DefaultView;

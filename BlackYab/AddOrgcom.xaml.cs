@@ -39,6 +39,7 @@ namespace BlackYab
             details.Add(Convert.ToString(Convert.ToString(checkBoxOrgCom.IsChecked)[0]));
 
             input.InputData(details, model, WordList.addAdmin);
+            MessageBox.Show("Addition Complete");
             this.Close();
         }
 

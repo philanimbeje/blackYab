@@ -51,6 +51,7 @@ namespace BlackYab
                 details.Add(Convert.ToString(DateTime.Now));
 
                 input.InputData(details, model, WordList.addSpeaker);
+                MessageBox.Show("Addition Complete");
 
             }
             else
@@ -61,6 +62,7 @@ namespace BlackYab
                 details.Add(Convert.ToString(canbreak[0]));
 
                 input.InputData(details, model, WordList.addAdjudicator);
+                MessageBox.Show("Addition Complete");
             }
             this.Close();
         }
